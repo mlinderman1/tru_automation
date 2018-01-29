@@ -1,8 +1,9 @@
 #  Author: Mike.Linderman@toysrus.com
-#  Recent Update: 1/22/2018
+#  Recent Update: 1/29/2018
 
 Feature: Guest Checkout
 
+  @critical_path
   Scenario Outline: Guest user having one item in cart for shipping (No Gifting) and payment with one CC.
 
     Given the user navigates to "<site>" site in "<environment>" environment

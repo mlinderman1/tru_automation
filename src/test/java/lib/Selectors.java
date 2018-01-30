@@ -36,6 +36,8 @@ public class Selectors {
   // PLP Page
   public static final String container__page__plp = ".webstore-plp-page";
   public static final String container__plp_grid = ".tru-product-grid__list";
+  public static final String container__plp_grid_item = ".tru-product-grid__list-item";
+  public static final String container__plp_grid_item_image = ".product-item__product-image-primary";
   public static final String container__plp_item = ".product-item";
   public static final String container__plp_item__non_OOS = ".product-item__btn-group";
   public static final String container__plp_item__OOS = ".product-item--out";

@@ -11,8 +11,9 @@ Feature: Webstore: Add to Cart
     Then the Add to Cart overlay is displayed
 
     Examples:
-    |site|environment|ship_type|
-    |TRU |qa2        |ship-to  |
+      |site|environment|ship_type|
+      |TRU |qa2        |ship-to    |
+
 
   Scenario Outline: Guest user adds ISPU item from PLP page
 
@@ -34,8 +35,8 @@ Feature: Webstore: Add to Cart
     Then the Add to Cart overlay is displayed
 
     Examples:
-    |site|environment|
-    |TRU |qa2        |
+      |site|environment|
+      |TRU |qa2        |
 
   Scenario Outline: Guest user adds any in-stock ISPU item from PDP page
 
@@ -45,6 +46,7 @@ Feature: Webstore: Add to Cart
     And the user clicks 'Find in Store' link
     And the user selects store to pick up item
     Then the Add to Cart overlay is displayed
+
 
     Examples:
       |site|environment|
@@ -60,7 +62,6 @@ Feature: Webstore: Add to Cart
     And the user waits for the Add to Cart overlay to not be displayed
     And the user adds "pickup" item to cart from plp page
     Then the Add to Cart overlay is displayed
-
 
     Examples:
       |site|environment|

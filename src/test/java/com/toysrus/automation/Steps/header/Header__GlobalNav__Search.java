@@ -2,6 +2,7 @@ package com.toysrus.automation.Steps.header;
 
 import com.toysrus.automation.lib.Data;
 import com.toysrus.automation.Steps.common.*;
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.When;
@@ -26,6 +27,9 @@ public class Header__GlobalNav__Search extends AbstractPage_StepDefs {
     Random rand = new Random();
     int n;
     Common_StepDefs common = new Common_StepDefs();
+    Selectors selector = new Selectors();
+    t2Selectors t2selector = new t2Selectors();
+    Boolean isT2Page = driver.findElements(By.cssSelector(".navbar")).size() > 0;
 
 
     @Before
@@ -42,52 +46,34 @@ public class Header__GlobalNav__Search extends AbstractPage_StepDefs {
 
     @When("^the user searches for \"([^\"]*)\"$")
     public void iSearchForKeyword(String keyword) throws Throwable {
-        Boolean isT2Page = driver.findElements(By.cssSelector(".navbar")).size() > 0;
-
-
-        if (isT2Page.equals(true)) {
-            t2Selectors selector = new t2Selectors();
-
+        try {
             WebElement header = driver.findElement(By.cssSelector(selector.input__global_nav__search_field));
             wait.until(ExpectedConditions.visibilityOf(header));
 
             WebElement input__global_nav__search_field = driver.findElement(By.cssSelector(selector.input__global_nav__search_field));
 
-            if (keyword.contains("random") || keyword.contains("any")) {
-                iSearchForARandomItem();
-            } else {
-                String cssSelector = selector.input__global_nav__search_field;
-                String data = keyword;
+            String cssSelector = selector.input__global_nav__search_field;
+            String data = keyword;
 
-                common.inputField(cssSelector, data);
-                input__global_nav__search_field.sendKeys(Keys.RETURN);
+            common.inputField(cssSelector, data);
+            input__global_nav__search_field.sendKeys(Keys.RETURN);
+        }
+        catch (Exception e) {
+            WebElement header = driver.findElement(By.cssSelector(t2selector.input__global_nav__search_field));
+            wait.until(ExpectedConditions.visibilityOf(header));
 
-            }
+            WebElement input__global_nav__search_field = driver.findElement(By.cssSelector(t2selector.input__global_nav__search_field));
 
+            String cssSelector = t2selector.input__global_nav__search_field;
+            String data = keyword;
 
-        } else if (isT2Page.equals(false)) {
-            Selectors selector = new Selectors();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector.input__global_nav__search_field)));
-
-            WebElement input__global_nav__search_field = driver.findElement(By.cssSelector(selector.input__global_nav__search_field));
-
-            if (keyword.contains("random") || keyword.contains("any")) {
-                iSearchForARandomItem();
-            } else {
-                String cssSelector = selector.input__global_nav__search_field;
-                String data = keyword;
-
-                common.inputField(cssSelector, data);
-                input__global_nav__search_field.sendKeys(Keys.RETURN);
-            }
-
+            common.inputField(cssSelector, data);
+            input__global_nav__search_field.sendKeys(Keys.RETURN);
         }
     }
 
     @When("^the user searches for a random item$")
     public void iSearchForARandomItem() throws Throwable {
-        Selectors selector = new Selectors();
-
         ArrayList searchItems = Data.search_Items();
 
         int i=0;

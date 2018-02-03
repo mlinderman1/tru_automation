@@ -1,12 +1,19 @@
-package com.toysrus.automation.Steps.plp;
+package com.toysrus.automation.Steps.pages;
 
 import com.toysrus.automation.Steps.common.AbstractPage_StepDefs;
+import com.toysrus.automation.Steps.common.Common_StepDefs;
+import com.toysrus.automation.Steps.overlays.Overlay__LightBox;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import org.openqa.selenium.WebDriver;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PLP__Pagination extends AbstractPage_StepDefs {
+import java.net.URL;
+
+public class Page__GiftCards extends AbstractPage_StepDefs {
 
 
     public class Selectors {

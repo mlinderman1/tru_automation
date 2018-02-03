@@ -37,7 +37,6 @@ public class Header__GlobalNav__MiniCart extends AbstractPage_StepDefs {
 
     @When("^the user clicks the minicart button from the global navbar$")
     public void theUserClicksTheMinicartButtonFromTheGlobalNavbar() throws Throwable {
-
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector.btn_global_nav__minicart)));
             driver.findElement(By.cssSelector(selector.btn_global_nav__minicart)).click();

@@ -13,7 +13,7 @@ Feature: Webstore: Add to Cart
 
   Examples:
       |site|environment|ship_type|
-      |TRU |qa2       |ship-to    |
+      |TRU |prod       |ship-to    |
 
 
   Scenario Outline: Guest user adds ISPU item from PLP page
@@ -26,7 +26,7 @@ Feature: Webstore: Add to Cart
 
   Examples:
       |site|environment|ship_type|
-      |TRU |qa2        |pickup    |
+      |TRU |prod        |pickup    |
 
   Scenario Outline: Guest user adds any in-stock ship-to item from PDP page
 
@@ -34,12 +34,13 @@ Feature: Webstore: Add to Cart
     And the user searches for a random item
     And the user is on the PLP page
     When the user clicks to PDP of in-stock Ship-to item from PLP page
+    When the user is on the PDP page
     And the user adds PDP item to cart
     Then the Add to Cart overlay is displayed
 
   Examples:
       |site|environment|
-      |TRU |qa2        |
+      |TRU |prod        |
 
   Scenario Outline: Guest user adds any in-stock ISPU item from PDP page
 
@@ -47,6 +48,7 @@ Feature: Webstore: Add to Cart
     And the user searches for a random item
     And the user is on the PLP page
     When the user clicks to PDP of in-stock ISPU item from PLP page
+    When the user is on the PDP page
     And the user clicks 'Find in Store' link
     And the user selects store to pick up item
     Then the Add to Cart overlay is displayed
@@ -54,7 +56,7 @@ Feature: Webstore: Add to Cart
 
   Examples:
       |site|environment|
-      |TRU |qa2        |
+      |TRU |prod        |
 
 #  Scenario Outline: Guest user adds a gift-eligible item from PDP page
 
@@ -70,4 +72,4 @@ Feature: Webstore: Add to Cart
 
   Examples:
       |site|environment|
-      |TRU |qa2        |
+      |TRU |prod        |

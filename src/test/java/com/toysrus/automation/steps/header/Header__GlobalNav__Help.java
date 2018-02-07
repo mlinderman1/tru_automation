@@ -25,7 +25,7 @@ public class Header__GlobalNav__Help extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 15);
     Random rand = new Random();
     int n;
     Common_StepDefs common = new Common_StepDefs();

@@ -15,7 +15,7 @@ public class Flyout__FindAStore extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
 
     @Then("^the Find a Store flyout is displayed$")

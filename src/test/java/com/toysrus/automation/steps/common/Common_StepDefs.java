@@ -18,73 +18,80 @@ import java.util.concurrent.TimeUnit;
 public class Common_StepDefs extends AbstractPage_StepDefs {
 
     public class Selectors {
-    public static final String page = ".page-layout";
-  }
-
-  WebDriver driver = getDriver();
-  WebDriverWait wait = new WebDriverWait(driver, 30);
-  URL siteURL;
-  Random rand = new Random();
-  int n;
-  Overlay__LightBox lightBox = new Overlay__LightBox();
-
-   public void typeIntoInputField(String cssSelector, String input){
-    WebElement element = driver.findElement(By.cssSelector(cssSelector));
-    String val = input;
-
-    element.clear();
-
-    for (int i = 0; i < val.length(); i++){
-      char c = val.charAt(i);
-      String s = new StringBuilder().append(c).toString();
-      element.sendKeys(s);
+        public static final String page = ".page-layout";
+        public static final String t2page = ".navbar-top";
     }
-  }
 
-  public void inputField(String cssSelector, String userData){
-    try {
-      String selector = cssSelector;
-      String data = userData;
+    WebDriver driver = getDriver();
+    WebDriverWait wait = new WebDriverWait(driver, 15);
+    URL siteURL;
+    Random rand = new Random();
+    int n;
+    Overlay__LightBox lightBox = new Overlay__LightBox();
+    Selectors selector = new Selectors();
 
-      WebElement element = driver.findElement(By.cssSelector(selector));
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector)));
+    public void typeIntoInputField(String cssSelector, String input){
+        WebElement element = driver.findElement(By.cssSelector(cssSelector));
+        String val = input;
 
-      do {
-        typeIntoInputField(selector,data);
-        element.sendKeys(Keys.TAB);
-      }
-      while(!element.getAttribute("value").contains(data));
+        element.clear();
+
+        for (int i = 0; i < val.length(); i++){
+            char c = val.charAt(i);
+            String s = new StringBuilder().append(c).toString();
+            element.sendKeys(s);
+        }
     }
-    catch (Exception e){
-      System.out.println(e);
+
+    public void inputField(String cssSelector, String userData){
+        try {
+            String selector = cssSelector;
+            String data = userData;
+
+            WebElement element = driver.findElement(By.cssSelector(selector));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector)));
+
+            do {
+                typeIntoInputField(selector,data);
+                element.sendKeys(Keys.TAB);
+            }
+            while(!element.getAttribute("value").contains(data));
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
-  }
 
-  public void selectFromDropdownMenu(String cssSelector, String selection){
-    try{
-      String selector = cssSelector;
-      String data = selection;
+    public void selectFromDropdownMenu(String cssSelector, String selection){
+        try{
+            String selector = cssSelector;
+            String data = selection;
 
-      Select cssSelection = new Select(driver.findElement(By.cssSelector(selector)));
-      WebElement element = driver.findElement(By.cssSelector(selector));
-      wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(selector)));
+            Select cssSelection = new Select(driver.findElement(By.cssSelector(selector)));
+            WebElement element = driver.findElement(By.cssSelector(selector));
+            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(selector)));
 
-      do {
-        cssSelection.selectByValue(data);
-      }
-      while(!element.getAttribute("value").equals(data));
+            do {
+                cssSelection.selectByValue(data);
+            }
+            while(!element.getAttribute("value").equals(data));
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
-    catch (Exception e){
-      System.out.println(e);
-    }
-  }
 
-  @When("^the user goes back one page$")
-  public void iGoBackOnePage() throws Throwable
-  {
-    driver.navigate().back();
-    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-  }
+    public Boolean verifyT2Page() throws Throwable {
+        Boolean isT2Page = driver.findElements(By.cssSelector(selector.t2page)).size() > 0;
+        return isT2Page;
+    }
+
+    @When("^the user goes back one page$")
+    public void iGoBackOnePage() throws Throwable
+    {
+        driver.navigate().back();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }
 
     @Then("^the user refreshes the page$")
     public void theUserRefreshesThePage() throws Throwable {

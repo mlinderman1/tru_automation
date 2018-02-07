@@ -2,10 +2,12 @@ package com.toysrus.automation.steps.pdp;
 
 import com.toysrus.automation.steps.common.*;
 import com.toysrus.automation.steps.flyouts.*;
+import com.toysrus.automation.steps.overlays.Overlay__LightBox;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,8 +21,9 @@ public class PDP__Common extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
+    Overlay__LightBox lightBox = new Overlay__LightBox();
 
     @Given("^the user is on the PDP page$")
     public void theUserIsOnThePDPPage() throws Throwable {
@@ -29,6 +32,15 @@ public class PDP__Common extends AbstractPage_StepDefs {
         }
         catch(Exception e){
             System.out.println(e);
+        }
+        finally{
+            try
+            {
+                lightBox.theUserClosesTheLightbox();
+            }
+            catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
 

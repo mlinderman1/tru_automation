@@ -16,7 +16,7 @@ public class Overlay__AddToCart extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
 
     @Then("^the Add to Cart overlay is displayed$")

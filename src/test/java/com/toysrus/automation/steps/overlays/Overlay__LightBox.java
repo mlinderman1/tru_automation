@@ -14,7 +14,7 @@ public class Overlay__LightBox extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
 
     @When("^the user closes the lightbox$")

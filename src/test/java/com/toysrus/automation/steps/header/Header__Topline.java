@@ -1,10 +1,13 @@
 package com.toysrus.automation.steps.header;
 
 import com.toysrus.automation.steps.common.*;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Random;
@@ -43,16 +46,31 @@ public class Header__Topline extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 15);
     Random rand = new Random();
     int n;
     Common_StepDefs common = new Common_StepDefs();
-    Selectors selector = new Selectors();
+    //    String selector = null;
+        Selectors selector = new Selectors();
     t2Selectors t2selector = new t2Selectors();
+
+
+    public void pageVersion() throws Throwable {
+        if (common.verifyT2Page().equals(true)) {
+//            t2Selectors selector = new t2Selectors();
+//            return selector;
+            System.out.println("/////// T2 Page");
+        } else if (common.verifyT2Page().equals(false)) {
+//        Selectors selector = new Selectors();
+//        return selector;
+            System.out.println("/////// NOT T2 Page");
+        }
+    }
+
 
     @When("^the user clicks mini \"([^\"]*)\" logo from topline header$")
     public void theUserClicksMiniLogoFromToplineHeader(String logo) throws Throwable {
-        if (logo.toLowerCase().equals("tru")||logo.toLowerCase().equals("toys")){
+            if (logo.toLowerCase().equals("tru")||logo.toLowerCase().equals("toys")){
             try{
                 driver.findElement(By.cssSelector(selector.btn__topline__logo__TRU)).click();
             }
@@ -150,6 +168,13 @@ public class Header__Topline extends AbstractPage_StepDefs {
     @When("^the user clicks Weekly Ad link from topline header$")
     public WebElement theUserClicksWeeklyAdLinkFromToplineHeader() throws Throwable {
         WebElement link__topline__weekly_ad = null;
+
+        WebElement pageMarker = driver.findElement(By.xpath("//*[text()='savings center']"));
+        wait.until(ExpectedConditions.visibilityOf(pageMarker));
+
+//        System.out.println("/////////"+common.verifyT2Page());
+
+
 
         try {
             link__topline__weekly_ad = driver.findElement(By.cssSelector(selector.link__topline__weekly_ad));

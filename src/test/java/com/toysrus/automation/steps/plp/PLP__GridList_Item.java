@@ -28,7 +28,7 @@ public class PLP__GridList_Item extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 15);
     Random rand = new Random();
     Selectors selector = new Selectors();
     Flyout__PickupInStore ispu = new Flyout__PickupInStore();

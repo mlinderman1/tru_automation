@@ -19,7 +19,7 @@ public class PDP__AddToCart extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
     Random rand = new Random();
     Flyout__PickupInStore ispu = new Flyout__PickupInStore();

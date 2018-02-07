@@ -35,7 +35,7 @@ public class PLP__AddToCart extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 15);
     Random rand = new Random();
     Selectors selector = new Selectors();
     Flyout__PickupInStore ispu = new Flyout__PickupInStore();
@@ -57,9 +57,9 @@ public class PLP__AddToCart extends AbstractPage_StepDefs {
 
             if (buttonType.toLowerCase().contains("s2h") || buttonType.toLowerCase().contains("ship")) {
                 n = rand.nextInt(atcButtonsList.size());
-
                 atcButtonsList.get(n).click();
-            } else if (buttonType.toLowerCase().equals("ispu") || buttonType.toLowerCase().contains("store") || buttonType.toLowerCase().contains("pickup")) {
+            }
+            else if (buttonType.toLowerCase().equals("ispu") || buttonType.toLowerCase().contains("store") || buttonType.toLowerCase().contains("pickup")) {
 
                 n = rand.nextInt(ispuButtonsList.size());
                 ispuButtonsList.get(n).click();

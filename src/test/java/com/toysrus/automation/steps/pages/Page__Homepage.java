@@ -2,6 +2,7 @@ package com.toysrus.automation.steps.pages;
 
 import com.toysrus.automation.steps.common.*;
 import com.toysrus.automation.steps.overlays.*;
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -11,14 +12,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 
 public class Page__Homepage extends AbstractPage_StepDefs {
-
-
 
     public class Selectors {
         public static final String page = ".page-layout";
@@ -27,7 +28,7 @@ public class Page__Homepage extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
     URL siteURL;
     Overlay__LightBox lightBox = new Overlay__LightBox();
@@ -131,21 +132,21 @@ public class Page__Homepage extends AbstractPage_StepDefs {
     @Given("^the user navigates to ToysRUs site in \"([^\"]*)\" environment$")
     public void theUserNavigatesToToysRUsSiteInEnvironment(String environment) throws Throwable {
         try{
-                if (environment.toLowerCase().contains("prod") || environment.toLowerCase().contains("live")){
-                    siteURL = new URL("https://www.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa1")) {
-                    siteURL = new URL("https://webstoreqa1.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa2")) {
-                    siteURL = new URL("https://webstoreqa2.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa4")) {
-                    siteURL = new URL("https://webstoreqa4.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("staging")) {
-                    siteURL = new URL("https://webstorestaging.toysrus.com");
-                }
+            if (environment.toLowerCase().contains("prod") || environment.toLowerCase().contains("live")){
+                siteURL = new URL("https://www.toysrus.com");
+            }
+            else if (environment.toLowerCase().equals("qa1")) {
+                siteURL = new URL("https://webstoreqa1.toysrus.com");
+            }
+            else if (environment.toLowerCase().equals("qa2")) {
+                siteURL = new URL("https://webstoreqa2.toysrus.com");
+            }
+            else if (environment.toLowerCase().equals("qa4")) {
+                siteURL = new URL("https://webstoreqa4.toysrus.com");
+            }
+            else if (environment.toLowerCase().equals("staging")) {
+                siteURL = new URL("https://webstorestaging.toysrus.com");
+            }
             driver.navigate().to(siteURL);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
         }
@@ -188,5 +189,5 @@ public class Page__Homepage extends AbstractPage_StepDefs {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector.page__homepage__bru)));
     }
 
-
 }
+

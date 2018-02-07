@@ -1,5 +1,5 @@
 #  Author: Mike.Linderman@toysrus.com
-#  Recent Update: 2/1/2018
+#  Recent Update: 2/7/2018
 
 Feature: Webstore: Add to Cart
 
@@ -53,22 +53,6 @@ Feature: Webstore: Add to Cart
     And the user selects store to pick up item
     Then the Add to Cart overlay is displayed
 
-
-  Examples:
-      |site|environment|
-      |TRU |prod        |
-
-#  Scenario Outline: Guest user adds a gift-eligible item from PDP page
-
-  Scenario Outline: Guest user adds ship-to and ISPU items from PLP page
-
-    Given the user navigates to "<site>" site in "<environment>" environment
-    And the user searches for a random item
-    And the user is on the PLP page
-    When the user adds "ship-to" item to cart from plp page
-    And the user waits for the Add to Cart overlay to not be displayed
-    And the user adds "pickup" item to cart from plp page
-    Then the Add to Cart overlay is displayed
 
   Examples:
       |site|environment|

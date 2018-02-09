@@ -33,6 +33,7 @@ public class Page__Homepage extends AbstractPage_StepDefs {
     URL siteURL;
     Overlay__LightBox lightBox = new Overlay__LightBox();
 
+
     @Before
     public void setUp() {
         getDriver();
@@ -44,130 +45,89 @@ public class Page__Homepage extends AbstractPage_StepDefs {
         closeDriver();
     }
 
+    public String getURL() throws Throwable{
+//        String env = System.getProperty("ENVIRONMENT");  //WORKS FOR MAVEN
+        String env = System.getenv("ENVIRONMENT");  //WORKS FOR IDE
+        String env_prefix = null;
 
-    @And("^the user navigates to \"([^\"]*)\" site in \"([^\"]*)\" environment$")
-    public void iNavigateToSiteSite(String site, String environment) throws Throwable {
+        if (env.toLowerCase().contains("prod")){
+            env_prefix = "https://www.";
+            return env_prefix;
+        }
+        else if (env.toLowerCase().equals("qa2")){
+            env_prefix = "https://webstoreqa2.";
+            return env_prefix;
+        }
+        return null;
+    }
 
-        try{
-            if (site.toLowerCase().contains("toys") || site.toLowerCase().equals("tru")) {
-                if (environment.toLowerCase().contains("prod") || environment.toLowerCase().contains("live")){
-                    siteURL = new URL("https://www.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa1")) {
-                    siteURL = new URL("https://webstoreqa1.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa2")) {
-                    siteURL = new URL("https://webstoreqa2.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa4")) {
-                    siteURL = new URL("https://webstoreqa4.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("staging")) {
-                    siteURL = new URL("https://webstorestaging.toysrus.com");
-                }
 
-            } else if (site.toLowerCase().contains("babies") || site.toLowerCase().equals("bru")) {
-                if (environment.toLowerCase().contains("prod")){
-                    siteURL = new URL("https://www.babiesrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa1")) {
-                    siteURL = new URL("https://webstoreqa1.babiesrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa2")) {
-                    siteURL = new URL("https://webstoreqa2.babiesrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa4")) {
-                    siteURL = new URL("https://webstoreqa4.babiesrus.com");
-                }
-                else if (environment.toLowerCase().equals("staging")) {
-                    siteURL = new URL("https://webstorestaging.babiesrus.com");
-                }
-            } else if (site.toLowerCase().contains("registry")) {
-                if (environment.toLowerCase().contains("prod")){
-                    siteURL = new URL("https://babyregistry.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa1")) {
-                    siteURL = new URL("");
-                }
-                else if (environment.toLowerCase().equals("qa2")) {
-                    siteURL = new URL("");
-                }
-                else if (environment.toLowerCase().equals("staging")) {
-                    siteURL = new URL("https://babyregistryuat.toysrus.com");
-                }
-            } else if ((site.toLowerCase().equals("wishlist") || (site.toLowerCase().equals("wish list")))) {
-                if (environment.toLowerCase().contains("prod")){
-                    siteURL = new URL("https://wishlist.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa1")) {
-                    siteURL = new URL("");
-                }
-                else if (environment.toLowerCase().equals("qa2")) {
-                    siteURL = new URL("");
-                }
-                else if (environment.toLowerCase().equals("staging")) {
-                    siteURL = new URL("https://wishlistuat.toysrus.com");
-                }
-            }
+    @And("^the user navigates to \"([^\"]*)\" site$")
+    public void iNavigateToSiteSite(String site) throws Throwable {
+        String env_prefix = getURL();
+        String siteURL = null;
+
+        if (site.toLowerCase().contains("toys") || site.toLowerCase().equals("tru")) {
+            siteURL = env_prefix + "toysrus.com";
+        } else if (site.toLowerCase().contains("babies") || site.toLowerCase().equals("bru")) {
+            siteURL = env_prefix + "babiesrus.com";
+        } else if (site.toLowerCase().contains("registry")) {
+        }
+        try {
             driver.navigate().to(siteURL);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
-        }
-        catch (InvalidArgumentException e) {
-            System.out.println(e);
-        }
 
-        try
-        {
-            lightBox.theUserClosesTheLightbox();
-        }
-        catch (org.openqa.selenium.NoSuchElementException e) {
-            System.out.println(e);
-        }
-
-        catch (TimeoutException e) {
+            try {
+                lightBox.theUserClosesTheLightbox();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    @Given("^the user navigates to ToysRUs site in \"([^\"]*)\" environment$")
-    public void theUserNavigatesToToysRUsSiteInEnvironment(String environment) throws Throwable {
+    @Given("^the user navigates to ToysRUs site$")
+    public void theUserNavigatesToToysRUsSite() throws Throwable {
+        String env_prefix = getURL();
+        String siteURL = env_prefix + "toysrus.com";
         try{
-            if (environment.toLowerCase().contains("prod") || environment.toLowerCase().contains("live")){
-                siteURL = new URL("https://www.toysrus.com");
-            }
-            else if (environment.toLowerCase().equals("qa1")) {
-                siteURL = new URL("https://webstoreqa1.toysrus.com");
-            }
-            else if (environment.toLowerCase().equals("qa2")) {
-                siteURL = new URL("https://webstoreqa2.toysrus.com");
-            }
-            else if (environment.toLowerCase().equals("qa4")) {
-                siteURL = new URL("https://webstoreqa4.toysrus.com");
-            }
-            else if (environment.toLowerCase().equals("staging")) {
-                siteURL = new URL("https://webstorestaging.toysrus.com");
-            }
             driver.navigate().to(siteURL);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
+
+            try
+            {
+                lightBox.theUserClosesTheLightbox();
+            }
+            catch (Exception e) {
+                System.out.println(e);
+            }
         }
-        catch (InvalidArgumentException e) {
+        catch(Exception e){
             System.out.println(e);
         }
-
-        try
-        {
-            lightBox.theUserClosesTheLightbox();
-        }
-        catch (org.openqa.selenium.NoSuchElementException e) {
-            System.out.println(e);
-        }
-
-        catch (TimeoutException e) {
-            System.out.println(e);
-        }
-
     }
 
+    @Given("^the user navigates to BabiesRUs site$")
+    public void theUserNavigatesToBabiesRUsSite() throws Throwable {
+        String env_prefix = getURL();
+        String siteURL = env_prefix + "babiesrus.com";
+        try{
+            driver.navigate().to(siteURL);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
+
+            try
+            {
+                lightBox.theUserClosesTheLightbox();
+            }
+            catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
 
     @Then("^the user is on \"([^\"]*)\" homepage$")
     public void theUserIsOnHomepage(String site) throws Throwable {

@@ -17,6 +17,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
 import java.net.URL;
 
 public class Page__Homepage extends AbstractPage_StepDefs {
@@ -28,6 +29,7 @@ public class Page__Homepage extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
+
     WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
     URL siteURL;
@@ -35,7 +37,8 @@ public class Page__Homepage extends AbstractPage_StepDefs {
 
 
     @Before
-    public void setUp() {
+    public void init() throws IOException{
+        setUp();
         getDriver();
         driver.manage().window().maximize();
     }
@@ -46,8 +49,9 @@ public class Page__Homepage extends AbstractPage_StepDefs {
     }
 
     public String getURL() throws Throwable{
-//        String env = System.getProperty("ENVIRONMENT");  //WORKS FOR MAVEN
-        String env = System.getenv("ENVIRONMENT");  //WORKS FOR IDE
+//        String env = System.getProperty("env");  //WORKS FOR MAVEN
+        String env = prop.getProperty("env");
+//        String env = System.getenv("ENVIRONMENT");  //WORKS FOR IDE
         String env_prefix = null;
 
         if (env.toLowerCase().contains("prod")){
@@ -64,6 +68,7 @@ public class Page__Homepage extends AbstractPage_StepDefs {
 
     @And("^the user navigates to \"([^\"]*)\" site$")
     public void iNavigateToSiteSite(String site) throws Throwable {
+//        System.out.println("XXXXXXX "+System.getProperty("env"));
         String env_prefix = getURL();
         String siteURL = null;
 

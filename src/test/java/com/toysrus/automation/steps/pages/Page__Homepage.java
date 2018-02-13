@@ -2,6 +2,7 @@ package com.toysrus.automation.steps.pages;
 
 import com.toysrus.automation.steps.common.*;
 import com.toysrus.automation.steps.overlays.*;
+import com.toysrus.automation.utils.LocatorProps;
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -30,8 +31,8 @@ public class Page__Homepage extends AbstractPage_StepDefs {
     WebDriver driver = getDriver();
     WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
-    URL siteURL;
     Overlay__LightBox lightBox = new Overlay__LightBox();
+    String siteURL = null;
 
     @Before
     public void setUp() {
@@ -44,109 +45,11 @@ public class Page__Homepage extends AbstractPage_StepDefs {
         closeDriver();
     }
 
-
-    @And("^the user navigates to \"([^\"]*)\" site in \"([^\"]*)\" environment$")
-    public void iNavigateToSiteSite(String site, String environment) throws Throwable {
+    @Given("^the user navigates to ToysRUs site$")
+    public void theUserNavigatesToToysRUsSite() throws Throwable {
+        String siteURL = LocatorProps.getProperty("env");
 
         try{
-            if (site.toLowerCase().contains("toys") || site.toLowerCase().equals("tru")) {
-                if (environment.toLowerCase().contains("prod") || environment.toLowerCase().contains("live")){
-                    siteURL = new URL("https://www.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa1")) {
-                    siteURL = new URL("https://webstoreqa1.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa2")) {
-                    siteURL = new URL("https://webstoreqa2.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa4")) {
-                    siteURL = new URL("https://webstoreqa4.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("staging")) {
-                    siteURL = new URL("https://webstorestaging.toysrus.com");
-                }
-
-            } else if (site.toLowerCase().contains("babies") || site.toLowerCase().equals("bru")) {
-                if (environment.toLowerCase().contains("prod")){
-                    siteURL = new URL("https://www.babiesrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa1")) {
-                    siteURL = new URL("https://webstoreqa1.babiesrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa2")) {
-                    siteURL = new URL("https://webstoreqa2.babiesrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa4")) {
-                    siteURL = new URL("https://webstoreqa4.babiesrus.com");
-                }
-                else if (environment.toLowerCase().equals("staging")) {
-                    siteURL = new URL("https://webstorestaging.babiesrus.com");
-                }
-            } else if (site.toLowerCase().contains("registry")) {
-                if (environment.toLowerCase().contains("prod")){
-                    siteURL = new URL("https://babyregistry.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa1")) {
-                    siteURL = new URL("");
-                }
-                else if (environment.toLowerCase().equals("qa2")) {
-                    siteURL = new URL("");
-                }
-                else if (environment.toLowerCase().equals("staging")) {
-                    siteURL = new URL("https://babyregistryuat.toysrus.com");
-                }
-            } else if ((site.toLowerCase().equals("wishlist") || (site.toLowerCase().equals("wish list")))) {
-                if (environment.toLowerCase().contains("prod")){
-                    siteURL = new URL("https://wishlist.toysrus.com");
-                }
-                else if (environment.toLowerCase().equals("qa1")) {
-                    siteURL = new URL("");
-                }
-                else if (environment.toLowerCase().equals("qa2")) {
-                    siteURL = new URL("");
-                }
-                else if (environment.toLowerCase().equals("staging")) {
-                    siteURL = new URL("https://wishlistuat.toysrus.com");
-                }
-            }
-            driver.navigate().to(siteURL);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
-        }
-        catch (InvalidArgumentException e) {
-            System.out.println(e);
-        }
-
-        try
-        {
-            lightBox.theUserClosesTheLightbox();
-        }
-        catch (org.openqa.selenium.NoSuchElementException e) {
-            System.out.println(e);
-        }
-
-        catch (TimeoutException e) {
-            System.out.println(e);
-        }
-    }
-
-    @Given("^the user navigates to ToysRUs site in \"([^\"]*)\" environment$")
-    public void theUserNavigatesToToysRUsSiteInEnvironment(String environment) throws Throwable {
-        try{
-            if (environment.toLowerCase().contains("prod") || environment.toLowerCase().contains("live")){
-                siteURL = new URL("https://www.toysrus.com");
-            }
-            else if (environment.toLowerCase().equals("qa1")) {
-                siteURL = new URL("https://webstoreqa1.toysrus.com");
-            }
-            else if (environment.toLowerCase().equals("qa2")) {
-                siteURL = new URL("https://webstoreqa2.toysrus.com");
-            }
-            else if (environment.toLowerCase().equals("qa4")) {
-                siteURL = new URL("https://webstoreqa4.toysrus.com");
-            }
-            else if (environment.toLowerCase().equals("staging")) {
-                siteURL = new URL("https://webstorestaging.toysrus.com");
-            }
             driver.navigate().to(siteURL);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
         }
@@ -167,7 +70,6 @@ public class Page__Homepage extends AbstractPage_StepDefs {
         }
 
     }
-
 
     @Then("^the user is on \"([^\"]*)\" homepage$")
     public void theUserIsOnHomepage(String site) throws Throwable {

@@ -16,10 +16,10 @@ public class LocatorProps {
 
 		Properties properties = new Properties();
 		
-		if (ConfigProps.getProperty("env").equals("qa")) {
+		if (ConfigProps.getProperty("env").equals("qa2")) {
 
 			try {
-				inputStream = new FileInputStream("qa.properties");
+				inputStream = new FileInputStream("qa2.properties");
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

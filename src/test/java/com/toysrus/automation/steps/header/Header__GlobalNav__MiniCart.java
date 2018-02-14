@@ -1,6 +1,8 @@
 package com.toysrus.automation.steps.header;
 
 import com.toysrus.automation.steps.common.*;
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Header__GlobalNav__MiniCart extends AbstractPage_StepDefs {
+
     public class Selectors {
         public static final String btn_global_nav__minicart = ".header-fat__tile.header-fat__tile-cart";
     }

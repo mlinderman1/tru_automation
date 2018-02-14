@@ -28,7 +28,6 @@ public class LocatorProps {
 			try {
 				inputStream = new FileInputStream("prod.properties");
 				key = key.concat("."+site);
-
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

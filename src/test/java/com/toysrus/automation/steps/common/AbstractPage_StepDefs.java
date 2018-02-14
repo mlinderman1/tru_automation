@@ -19,8 +19,16 @@ public class AbstractPage_StepDefs {
 
     protected WebDriver getDriver() {
         if (driver == null) { //instantiated driver for the first time
+        
+            FirefoxBinary firefoxBinary = new FirefoxBinary();
+            firefoxBinary.addCommandLineOptions("-headless");
+
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setBinary(firefoxBinary);
+
+            driver = new FirefoxDriver(firefoxOptions);
 //            driver = new FirefoxDriver();
-            driver = new ChromeDriver();
+//            driver = new ChromeDriver();
             driver.manage().deleteAllCookies();
         }
         return driver;

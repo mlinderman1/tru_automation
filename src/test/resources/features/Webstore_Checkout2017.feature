@@ -1,11 +1,11 @@
 #  Author: Mike.Linderman@toysrus.com
-#  Recent Update: 2/13/2018
+#  Recent Update: 2/15/2018
 
 Feature: Webstore: Checkout Payment Variations
 
   Scenario Outline: Guest user adds one ship-to item, standard checkout with credit card payment
 
-    Given the user navigates to ToysRUs site
+    Given the user navigates to "<site>" site in "<env>" environment
     And the user searches for a random item
     And the user is on the PLP page
     And the user adds "<ship_type>" item to cart from plp page
@@ -26,13 +26,13 @@ Feature: Webstore: Checkout Payment Variations
     Then the confirmation page is displayed
 
   Examples:
-      |site|environment|ship_type|
-      |TRU |prod       |ship-to    |
+      |site|env|ship_type|
+      |TRU |qa2       |ship-to    |
 
 
   Scenario Outline: Guest user adds one ship-to item, standard checkout with pay in store payment
 
-    Given the user navigates to ToysRUs site
+    Given the user navigates to "<site>" site in "<env>" environment
     And the user searches for a random item
     And the user is on the PLP page
     And the user adds "<ship_type>" item to cart from plp page
@@ -52,5 +52,5 @@ Feature: Webstore: Checkout Payment Variations
     Then the confirmation page is displayed
 
     Examples:
-      |site|environment|ship_type|
-      |TRU |prod       |ship-to    |
+      |site|env|ship_type|
+      |TRU |qa2       |ship-to    |

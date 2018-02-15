@@ -45,9 +45,10 @@ public class Page__Homepage extends AbstractPage_StepDefs {
         closeDriver();
     }
 
-    @Given("^the user navigates to ToysRUs site$")
-    public void theUserNavigatesToToysRUsSite() throws Throwable {
-        String siteURL = LocatorProps.getProperty("env");
+    @Given("^the user navigates to \"([^\"]*)\" site in \"([^\"]*)\" environment$")
+    public void iNavigateToSiteSite(String site, String environment) throws Throwable {
+    	
+    	 String siteURL = LocatorProps.getProperty(environment.toLowerCase()+"."+site.toLowerCase());
 
         try{
             driver.navigate().to(siteURL);

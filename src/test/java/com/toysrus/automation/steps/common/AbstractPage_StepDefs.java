@@ -1,7 +1,9 @@
 package com.toysrus.automation.steps.common;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class AbstractPage_StepDefs {
 
@@ -9,7 +11,14 @@ public class AbstractPage_StepDefs {
 
     protected WebDriver getDriver() {
         if (driver == null){ //instantiated driver for the first time
-            driver = new FirefoxDriver();
+
+            FirefoxBinary firefoxBinary = new FirefoxBinary();
+            firefoxBinary.addCommandLineOptions("-headless");
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setBinary(firefoxBinary);
+            driver = new FirefoxDriver(firefoxOptions);
+
+        //    driver = new FirefoxDriver();
             driver.manage().deleteAllCookies();
         }
         return driver;

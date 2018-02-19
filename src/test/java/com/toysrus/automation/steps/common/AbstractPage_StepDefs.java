@@ -2,11 +2,11 @@ package com.toysrus.automation.steps.common;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.io.File;
 import java.io.FileReader;
@@ -22,16 +22,22 @@ public class AbstractPage_StepDefs {
 
     protected WebDriver getDriver() {
         if (driver == null) { //instantiated driver for the first time
-        
-            FirefoxBinary firefoxBinary = new FirefoxBinary();
-            firefoxBinary.addCommandLineOptions("-headless");
 
+   //     FireFox headless support
+
+/*            FirefoxBinary firefoxBinary = new FirefoxBinary();
+            firefoxBinary.addCommandLineOptions("-headless");
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.setBinary(firefoxBinary);
+            driver = new FirefoxDriver(firefoxOptions);*/
 
-            driver = new FirefoxDriver(firefoxOptions);
-//            driver = new FirefoxDriver();
-//            driver = new ChromeDriver();
+ //     FireFox headless support
+
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.addArguments("headless");
+            driver = new ChromeDriver(chromeOptions);
+
+
             driver.manage().deleteAllCookies();
         }
         return driver;

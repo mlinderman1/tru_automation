@@ -1,34 +1,31 @@
 package com.toysrus.automation;
 
+import com.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
+import cucumber.api.java.After;
 import cucumber.api.junit.Cucumber;
+
+import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"src/test/resources/features/"},
+@CucumberOptions(features = {"src/test/resources/features/Webstore_AddToCart.feature"},
         glue="com.toysrus.automation.steps",
+        		plugin = {"pretty",
+                        "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html",
+                        "json:target/cucumber-reports/cucumber.json"},
         strict = false)
 
 public class TestCase {
-//    public Properties prop;
-//    public File file;
-//    private FileReader fileReader;
-//
-//    public void readData() throws IOException {
-//        prop = new Properties();
-//        file = new File(System.getProperty("user.dir")+"src/test/resources/config.properties");
-//        FileReader fileReader = new FileReader(file);
-//        prop.load(fileReader);
+	
+	@AfterClass
+    public static void setup() {
+       // Reporter.loadXMLConfig(new File("/extent-config.xml"));
+        Reporter.setSystemInfo("User Name", System.getProperty("user.name"));
+	    Reporter.setSystemInfo("Time Zone", System.getProperty("user.timezone"));
 
-
-//        InputStream input = TestCase.class.getClassLoader().getResourceAsStream("src/test/resources/config.properties");
-//        prop.load(input);
-//        System.out.println("XXXXXXXXXXXXXXX"+prop.getProperty("env"));
-    }
+ }
+}	
+	

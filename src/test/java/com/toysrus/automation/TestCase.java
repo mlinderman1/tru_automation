@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import java.io.File;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(   features    = {"src/test/resources/features/Webstore_AddToCart.feature"},
+@CucumberOptions(   features    = {"src/test/resources/features/"},
                     glue        ="com.toysrus.automation.steps",
                     strict      = false)
 

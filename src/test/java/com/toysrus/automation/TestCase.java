@@ -13,9 +13,7 @@ import java.io.File;
 @RunWith(Cucumber.class)
 @CucumberOptions(   features    = {"src/test/resources/features/Webstore_AddToCart.feature"},
                     glue        ="com.toysrus.automation.steps",
-                    strict      = false,
-            		plugin = {"pretty",
-                        "json:target/cucumber-reports/cucumber.json"})
+                    strict      = false)
 
 
 public class TestCase {

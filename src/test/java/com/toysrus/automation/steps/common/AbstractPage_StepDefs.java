@@ -25,18 +25,18 @@ public class AbstractPage_StepDefs {
 
    //     FireFox headless support
 
-/*            FirefoxBinary firefoxBinary = new FirefoxBinary();
+            FirefoxBinary firefoxBinary = new FirefoxBinary();
             firefoxBinary.addCommandLineOptions("-headless");
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.setBinary(firefoxBinary);
-            driver = new FirefoxDriver(firefoxOptions);*/
+            driver = new FirefoxDriver(firefoxOptions);
 
- //     FireFox headless support
-
+ //     chrome headless support
+/*
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("headless");
             driver = new ChromeDriver(chromeOptions);
-
+*/
 
             driver.manage().deleteAllCookies();
         }

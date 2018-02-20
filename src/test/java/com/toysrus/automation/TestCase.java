@@ -11,21 +11,15 @@ import org.junit.runner.RunWith;
 import java.io.File;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"src/test/resources/features/Webstore_AddToCart.feature"},
-        glue="com.toysrus.automation.steps",
-        		plugin = {"pretty",
-                        "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html",
-                        "json:target/cucumber-reports/cucumber.json"},
-        strict = false)
+@CucumberOptions(   features    = {"src/test/resources/features/Webstore_AddToCart.feature"},
+                    glue        ="com.toysrus.automation.steps",
+                    strict      = false,
+            		plugin = {"pretty",
+                        "json:target/cucumber-reports/cucumber.json"})
+
 
 public class TestCase {
 	
-	@AfterClass
-    public static void setup() {
-       // Reporter.loadXMLConfig(new File("/extent-config.xml"));
-        Reporter.setSystemInfo("User Name", System.getProperty("user.name"));
-	    Reporter.setSystemInfo("Time Zone", System.getProperty("user.timezone"));
 
- }
 }	
 	

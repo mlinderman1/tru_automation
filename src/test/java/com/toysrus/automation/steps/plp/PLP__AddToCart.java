@@ -35,7 +35,7 @@ public class PLP__AddToCart extends AbstractPage_StepDefs {
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 15);
+    WebDriverWait wait = new WebDriverWait(driver, 30);
     Random rand = new Random();
     Selectors selector = new Selectors();
     Flyout__PickupInStore ispu = new Flyout__PickupInStore();

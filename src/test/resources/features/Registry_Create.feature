@@ -15,7 +15,7 @@ Feature: Registry: Create
     And the user enters their "<last_name>"
     And the user enters their "<user_name>"
     And the user enters their "<password>"
-    And the user enters their "<password>"
+    And the user enters their "<password_confirm>"
     And the user clicks the add co-registrant option1
     And the user enters their "<co_reg_first_name>"
     And the user enters their "<co_reg_last_name>"

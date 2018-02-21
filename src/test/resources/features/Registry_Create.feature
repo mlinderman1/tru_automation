@@ -32,8 +32,8 @@ Feature: Registry: Create
     Then the user lands on the my checklist page and has successfully created a registry account
 
     Examples:
-      |URL|environment|ship_type|reg_number|item_number|qty|browser|device|user_name|password|
-      |TRU |prod       |ship-to    |12345678|12345678  |1     |chrome|MAC |lisa@tru.com|password|
+      |URL|environment|ship_type|reg_number|item_number|qty|browser|device|user_name|password|co_reg_first_name
+      |TRU |prod       |ship-to    |12345678|12345678  |1     |chrome|MAC |lisa@tru.com|password|Saravana
  #Will update the data at a later point
 
 

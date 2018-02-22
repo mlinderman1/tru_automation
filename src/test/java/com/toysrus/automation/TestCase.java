@@ -13,7 +13,7 @@ import java.io.File;
 @RunWith(Cucumber.class)
 @CucumberOptions(   features    = {"src/test/resources/features/"},
                     glue        ="com.toysrus.automation.steps",
-					plugin = {"pretty","json:target/cucumber-reports/cucumber.json","com.cucumber.listener.ExtentCucumberFormatter:target/report.html"},
+					plugin = {"pretty","json:target/cucumber-reports/cucumber.json","com.cucumber.listener.ExtentCucumberFormatter:report.html"},
                     strict      = false)
 
 

@@ -1,13 +1,12 @@
 package com.toysrus.automation.steps.pdp;
 
 import com.toysrus.automation.steps.common.*;
-import com.toysrus.automation.steps.flyouts.*;
 import com.toysrus.automation.steps.overlays.Overlay__LightBox;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,12 +17,14 @@ public class PDP__Common extends AbstractPage_StepDefs {
     public class Selectors {
         public static final String container__page__pdp = ".pdp-page-container";
         public static final String link__pdp__ispu = ".product-ship-to-store__status-ispu a";
+        public static final String page__footer = ".footer-group.footer-sitemap";
     }
 
     WebDriver driver = getDriver();
     WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
     Overlay__LightBox lightBox = new Overlay__LightBox();
+    JavascriptExecutor je = (JavascriptExecutor) driver;
 
     @Given("^the user is on the PDP page$")
     public void theUserIsOnThePDPPage() throws Throwable {
@@ -66,6 +67,14 @@ public class PDP__Common extends AbstractPage_StepDefs {
 
         ispuLink.click();
     }
+    
+    @When("^the user scrolls down the page so sticky footer shows up$")
+    public void the_user_scrolls_down_the_page_so_sticky_footer_shows_up() throws Throwable {
+    	
+    	WebElement pageFooter = driver.findElement(By.cssSelector(selector.page__footer));
+    	je.executeScript("arguments[0].scrollIntoView(true);",pageFooter);
+    	 	
+       }
 
 
 }

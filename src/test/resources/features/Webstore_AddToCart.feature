@@ -1,5 +1,5 @@
 #  Author: Mike.Linderman@toysrus.com
-#  Recent Update: 2/7/2018
+#  Recent Update: 2/13/2018
 
 Feature: Webstore: Add to Cart
 
@@ -11,22 +11,21 @@ Feature: Webstore: Add to Cart
     And the user adds "<ship_type>" item to cart from plp page
     Then the Add to Cart overlay is displayed
 
-  Examples:
+    Examples:
       |site|environment|ship_type|
-      |TRU |prod       |ship-to    |
+      |TRU |qa2        |ship-to  |
 
 
   Scenario Outline: Guest user adds ISPU item from PLP page
 
     Given the user navigates to "<site>" site in "<environment>" environment
-    And the user searches for a random item
     And the user is on the PLP page
     When the user adds "<ship_type>" item to cart from plp page
     Then the Add to Cart overlay is displayed
 
-  Examples:
+    Examples:
       |site|environment|ship_type|
-      |TRU |prod        |pickup    |
+      |TRU |prod       |pickup    |
 
   Scenario Outline: Guest user adds any in-stock ship-to item from PDP page
 
@@ -38,9 +37,9 @@ Feature: Webstore: Add to Cart
     And the user adds PDP item to cart
     Then the Add to Cart overlay is displayed
 
-  Examples:
+    Examples:
       |site|environment|
-      |TRU |prod        |
+      |TRU |prod       |
 
   Scenario Outline: Guest user adds any in-stock ISPU item from PDP page
 
@@ -71,6 +70,6 @@ Feature: Webstore: Add to Cart
     And the user adds PDP item to cart from sticky footer
     Then the Add to Cart overlay is displayed
 
-  Examples:
+    Examples:
       |site|environment|
-      |TRU |prod        |
+      |TRU |prod       |

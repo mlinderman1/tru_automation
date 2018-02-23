@@ -19,13 +19,14 @@ Feature: Webstore: Add to Cart
   Scenario Outline: Guest user adds ISPU item from PLP page
 
     Given the user navigates to "<site>" site in "<environment>" environment
+    And the user searches for a random item
     And the user is on the PLP page
     When the user adds "<ship_type>" item to cart from plp page
     Then the Add to Cart overlay is displayed
 
     Examples:
       |site|environment|ship_type|
-      |TRU |prod       |pickup    |
+      |TRU |qa2        |pickup    |
 
   Scenario Outline: Guest user adds any in-stock ship-to item from PDP page
 
@@ -39,7 +40,7 @@ Feature: Webstore: Add to Cart
 
     Examples:
       |site|environment|
-      |TRU |prod       |
+      |TRU |qa2        |
 
   Scenario Outline: Guest user adds any in-stock ISPU item from PDP page
 
@@ -55,4 +56,4 @@ Feature: Webstore: Add to Cart
 
     Examples:
       |site|environment|
-      |TRU |prod       |
+      |TRU |qa2       |

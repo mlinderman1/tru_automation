@@ -26,7 +26,7 @@ public class PDP__Common extends AbstractPage_StepDefs {
     WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
     Overlay__LightBox lightBox = new Overlay__LightBox();
-    JavascriptExecutor je = (JavascriptExecutor) driver;
+    
 
     @Given("^the user is on the PDP page$")
     public void theUserIsOnThePDPPage() throws Throwable {
@@ -70,13 +70,6 @@ public class PDP__Common extends AbstractPage_StepDefs {
         ispuLink.click();
     }
     
-    @When("^the user scrolls down the page so sticky footer shows up$")
-    public void the_user_scrolls_down_the_page_so_sticky_footer_shows_up() throws Throwable {
-    	
-    	WebElement pageFooter = driver.findElement(By.cssSelector(selector.page__footer));
-    	je.executeScript("arguments[0].scrollIntoView(true);",pageFooter);
-    	 	
-       }
 
 
 }

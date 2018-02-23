@@ -1,26 +1,25 @@
 package com.toysrus.automation.steps.pages;
 
-import com.toysrus.automation.steps.common.*;
-import com.toysrus.automation.steps.overlays.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidArgumentException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.toysrus.automation.steps.common.AbstractPage_StepDefs;
+import com.toysrus.automation.steps.common.Common_StepDefs;
+import com.toysrus.automation.steps.overlays.Overlay__LightBox;
 import com.toysrus.automation.utils.LocatorProps;
-import cucumber.api.PendingException;
+
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import org.openqa.selenium.By;
-import org.openqa.selenium.InvalidArgumentException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.net.URL;
 
 public class Page__Homepage extends AbstractPage_StepDefs {
+	public static String envName;
 
     public class Selectors {
         public static final String page = ".page-layout";
@@ -49,12 +48,13 @@ public class Page__Homepage extends AbstractPage_StepDefs {
     public void iNavigateToSiteSite(String site, String environment) throws Throwable {
     	
     	 String siteURL = LocatorProps.getProperty(environment.toLowerCase()+"."+site.toLowerCase());
+    	 envName=environment.toLowerCase();
 
         try{
             driver.navigate().to(siteURL);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
         }
-        catch (InvalidArgumentException e) {
+        catch (Exception e) {
             System.out.println(e);
         }
 

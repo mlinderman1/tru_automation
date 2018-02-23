@@ -32,11 +32,11 @@ public class PDP__AddToCart extends AbstractPage_StepDefs {
 
         btn__add_to_cart.click();
 
-        try {
+        /*try {
             ispu.theUserSelectsStoreToPickUpItem();
         } catch (Exception e) {
             System.out.println(e);
-        }
+        }*/
     }
 
 

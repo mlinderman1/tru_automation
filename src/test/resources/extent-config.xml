@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extentreports>
+    <configuration>
+        <encoding>UTF-8</encoding>
+        <documentTitle>TRU Regression Automation Report-v1.0.0</documentTitle>
+        <reportName>TRU Regression Automation Report</reportName>
+        <reportHeadline>v1.0.0</reportHeadline>
+    </configuration>
+</extentreports>

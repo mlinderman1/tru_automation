@@ -52,9 +52,8 @@ public class Page__Homepage extends AbstractPage_StepDefs {
 
         try{
             driver.navigate().to(siteURL);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
         }
-        catch (InvalidArgumentException e) {
+        catch (Exception e) {
             System.out.println(e);
         }
 
@@ -62,14 +61,9 @@ public class Page__Homepage extends AbstractPage_StepDefs {
         {
             lightBox.theUserClosesTheLightbox();
         }
-        catch (org.openqa.selenium.NoSuchElementException e) {
+        catch (Exception e) {
             System.out.println(e);
         }
-
-        catch (TimeoutException e) {
-            System.out.println(e);
-        }
-
     }
 
     @Then("^the user is on \"([^\"]*)\" homepage$")

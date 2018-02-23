@@ -2,6 +2,7 @@ package com.toysrus.automation.steps.pages;
 
 import com.toysrus.automation.steps.common.*;
 import com.toysrus.automation.steps.overlays.*;
+import com.toysrus.automation.utils.LocatorProps;
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -30,8 +31,8 @@ public class Page__Homepage extends AbstractPage_StepDefs {
     WebDriver driver = getDriver();
     WebDriverWait wait = new WebDriverWait(driver, 15);
     Selectors selector = new Selectors();
-    URL siteURL;
     Overlay__LightBox lightBox = new Overlay__LightBox();
+    String siteURL = null;
 
 
     @Before
@@ -45,55 +46,17 @@ public class Page__Homepage extends AbstractPage_StepDefs {
         closeDriver();
     }
 
-    public String getURL() throws Throwable{
-//        String env = System.getProperty("ENVIRONMENT");  //WORKS FOR MAVEN
-        String env = System.getenv("ENVIRONMENT");  //WORKS FOR IDE
-        String env_prefix = null;
+    @Given("^the user navigates to \"([^\"]*)\" site in \"([^\"]*)\" environment$")
+    public void iNavigateToSiteSite(String site, String environment) throws Throwable {
+    	
+    	 String siteURL = LocatorProps.getProperty(environment.toLowerCase()+"."+site.toLowerCase());
 
-        if (env.toLowerCase().contains("prod")){
-            env_prefix = "https://www.";
-            return env_prefix;
-        }
-        else if (env.toLowerCase().equals("qa2")){
-            env_prefix = "https://webstoreqa2.";
-            return env_prefix;
-        }
-        return null;
-    }
-
-
-    @And("^the user navigates to \"([^\"]*)\" site$")
-    public void iNavigateToSiteSite(String site) throws Throwable {
-        String env_prefix = getURL();
-        String siteURL = null;
-
-        if (site.toLowerCase().contains("toys") || site.toLowerCase().equals("tru")) {
-            siteURL = env_prefix + "toysrus.com";
-        } else if (site.toLowerCase().contains("babies") || site.toLowerCase().equals("bru")) {
-            siteURL = env_prefix + "babiesrus.com";
-        } else if (site.toLowerCase().contains("registry")) {
-        }
-        try {
-            driver.navigate().to(siteURL);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
-
-            try {
-                lightBox.theUserClosesTheLightbox();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    @Given("^the user navigates to ToysRUs site$")
-    public void theUserNavigatesToToysRUsSite() throws Throwable {
-        String env_prefix = getURL();
-        String siteURL = env_prefix + "toysrus.com";
         try{
             driver.navigate().to(siteURL);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
 
             try
             {
@@ -103,31 +66,6 @@ public class Page__Homepage extends AbstractPage_StepDefs {
                 System.out.println(e);
             }
         }
-        catch(Exception e){
-            System.out.println(e);
-        }
-    }
-
-    @Given("^the user navigates to BabiesRUs site$")
-    public void theUserNavigatesToBabiesRUsSite() throws Throwable {
-        String env_prefix = getURL();
-        String siteURL = env_prefix + "babiesrus.com";
-        try{
-            driver.navigate().to(siteURL);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Common_StepDefs.Selectors.page)));
-
-            try
-            {
-                lightBox.theUserClosesTheLightbox();
-            }
-            catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-    }
 
     @Then("^the user is on \"([^\"]*)\" homepage$")
     public void theUserIsOnHomepage(String site) throws Throwable {

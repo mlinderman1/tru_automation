@@ -4,6 +4,7 @@ import com.toysrus.automation.steps.overlays.Overlay__LightBox;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -97,5 +98,64 @@ public class Common_StepDefs extends AbstractPage_StepDefs {
     public void theUserRefreshesThePage() throws Throwable {
         driver.navigate().refresh();
     }
+    
+    /**
+     * This method enters the given text in the specific webelement
+     * @param cssSelector
+     *  cssselector of the webelement
+     * @param text
+     * Required text to be entered
+     */
+	public void typeInto(String cssSelector, String text) {
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector))).sendKeys(text);
+	}
+
+    /*
+     * click on the element
+     */
+
+	public void clickOn(String cssSelector) {
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector))).click();
+	}
+	
+	/**
+	 * 
+	 * @param cssSelector
+	 * @return
+	 */
+
+	public String getText(String cssSelector) {
+		return wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector))).getText().trim();
+	}
+	
+	public void waitduration(long duration) throws InterruptedException {
+		Thread.sleep(duration);
+	}
+    
+    /**
+	 * Generate an email based on current UNIX timestamp
+	 * 
+	 * @return Returns the generated email
+	 */
+	public String generateEmail() {
+		// Create Random object
+		Random r = new Random();
+		// Returns randomly generated email id
+		return "toysrus" + Integer.toString(r.nextInt(32000)) + Integer.toString(r.nextInt(999)) + "@aol.com";
+	}
+	
+	public void waitForWebElement(String cssselector) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssselector)));
+	}
+	
+	public boolean isElementPresent(String cssselector) {
+	return driver.findElement(By.cssSelector(cssselector)).isDisplayed();	
+	}
+	
+	public void javascriptClick(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver; js.executeScript("arguments[0].click();", element);
+
+	}
+
 
 }

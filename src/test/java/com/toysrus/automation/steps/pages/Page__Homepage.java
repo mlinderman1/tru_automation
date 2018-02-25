@@ -26,6 +26,8 @@ public class Page__Homepage extends AbstractPage_StepDefs {
         public static final String page = ".page-layout";
         public static final String page__homepage__tru = ".page-wrapper--tru";
         public static final String page__homepage__bru = ".page-wrapper--bru";
+        public static final String page_homepage_aws_atg = ".site-ToysRUs";
+        public static final String page__homepage__wl = ".bru-container";
     }
 
     WebDriver driver = getDriver();
@@ -85,6 +87,25 @@ public class Page__Homepage extends AbstractPage_StepDefs {
     public void theUserIsOnBabiesRUsHomepage() throws Throwable {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector.page__homepage__bru)));
     }
+    
+   
+    
+    @Given("^the user navigates to \"([^\"]*)\" site in \"([^\"]*)\" environment for SSO$")
+    public void the_user_navigates_to_site_in_environment_for_SSO(String site, String environment ) throws Throwable {
+    	String siteurl=LocatorProps.getProperty(environment+"."+site);
+    	if (site.equalsIgnoreCase("atg_aws")) {
+    		driver.navigate().to(siteurl);
+        	wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector.page_homepage_aws_atg)));	
+		} else if(site.equalsIgnoreCase("BRU")){
+			driver.navigate().to(siteurl);
+        	wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector.page__homepage__bru)));	
+		}
+		else {
+			driver.navigate().to(siteurl);
+        	wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector.page__homepage__wl)));	
+		}
+       	
+        }
 
 }
 

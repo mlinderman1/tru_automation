@@ -46,6 +46,7 @@ public class Overlay__AddToCart extends AbstractPage_StepDefs {
 
     @And("^the user waits for the Add to Cart overlay to not be displayed$")
     public void theUserWaitsForTheAddToCartOverlayToNotBeDisplayed() throws Throwable {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector.overlay__add_to_cart)));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(selector.overlay__add_to_cart)));
     }
 }

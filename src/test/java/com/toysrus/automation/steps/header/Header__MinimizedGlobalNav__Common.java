@@ -77,6 +77,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	        }
 	    }
 	    
+	    
 	    @Then("^the user clicks 'live chat' from the minimized global navbar 'help'$")
 	    public WebElement theUserClicksLiveChatFromTheMinimizedGlobalNavbarHelp() throws Throwable {
 	        WebElement link__minimized_global_nav__help__help_center = null;
@@ -95,6 +96,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	        }
 	    }
 	    
+	    
 	    @And("^the user clicks 'signIn' button from the  minimized global navbar$")
 	    public void the_user_clicks_signIn_button_from_the_minimized_global_navbar() throws Throwable {
 			try{
@@ -105,8 +107,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 			}
 		}
 	    
-	    
-	    
+	 	    
 	    @Then("^the user is \"([^\"]*)\" SignedIn Successfully from the  minimized global navbar$")
 	    public void the_user_is_SignedIn_Successfully_from_the_minimized_global_navbar(String email) throws Throwable {
 			try {

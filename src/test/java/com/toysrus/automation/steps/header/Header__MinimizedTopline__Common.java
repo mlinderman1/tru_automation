@@ -29,6 +29,7 @@ public class Header__MinimizedTopline__Common extends AbstractPage_StepDefs {
 	        public static final String link__minimized_topline__find_a_store2 = ".store-locator-tooltip";
 	    }
 
+	    
 	    WebDriver driver = getDriver();
 	    WebDriverWait wait = new WebDriverWait(driver, 15);
 	    Random rand = new Random();
@@ -92,6 +93,7 @@ public class Header__MinimizedTopline__Common extends AbstractPage_StepDefs {
 	        }
 	    }
 
+	   
 	    @When("^the user clicks mini BabiesRUs logo from minimized topline header$")
 	    public WebElement theUserClicksBabiesRUsMiniLogoFromMinimizedToplineHeader() throws Throwable {
 	        WebElement btn__topline__logo__BRU = null;
@@ -107,6 +109,7 @@ public class Header__MinimizedTopline__Common extends AbstractPage_StepDefs {
 	        }
 	    }
 
+	    
 	    @When("^the user clicks Find a Store link from minimized topline header$")
 	    public WebElement theUserClicksFindAStoreLinkFromMinimizedToplineHeader() throws Throwable {
 	        WebElement link__topline__find_a_store = null;

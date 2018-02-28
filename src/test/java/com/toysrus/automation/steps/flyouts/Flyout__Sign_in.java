@@ -68,15 +68,15 @@ private void inputLoginPassword(String password){
 }
 
 @And("^the user submits the signIn button from flyout$")
-public void the_user_clicks_the_minicart_signIn_button_from_the_global_navbar() throws Throwable {
+public void the_user_submits_the_signIn_button_from_flyout() throws Throwable {
 	try{
 		
-		if(driver.findElement(By.cssSelector(selector.submit_btn__flyout__sign_in)).isDisplayed()){
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector.submit_btn__flyout__sign_in)));
+		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(selector.submit_btn__flyout__sign_in)));
 	    driver.findElement(By.cssSelector(selector.submit_btn__flyout__sign_in)).click();
+	    
+	   }catch(Exception e){
+			System.out.println(e);
 		}
-	}catch(Exception e){
-		System.out.println(e);
-	}
- } 
+	
+  } 
 }

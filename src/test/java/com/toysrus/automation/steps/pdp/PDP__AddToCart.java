@@ -3,6 +3,8 @@ package com.toysrus.automation.steps.pdp;
 import com.toysrus.automation.steps.common.*;
 import com.toysrus.automation.steps.flyouts.*;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +18,7 @@ public class PDP__AddToCart extends AbstractPage_StepDefs {
     public class Selectors {
         public static final String btn__pdp__add_to_cart = ".tru-product-actions__primary-button";
         public static final String btn__add_to_cart = "//button/span[text()='add to cart']";
+
     }
 
     WebDriver driver = getDriver();
@@ -38,6 +41,5 @@ public class PDP__AddToCart extends AbstractPage_StepDefs {
             System.out.println(e);
         }
     }
-
-
+    
 }

@@ -43,10 +43,20 @@ public class Page_Registry_Addtocart extends AbstractPage_StepDefs {
         public static final String Daytogo_Myreg_Txt = "text[class='days-to-go-banner-text']";
         public static final String Addtocart_Myreg_btn = "(//SPAN[text()='add to cart'][text()='add to cart'])[4]";
         public static final String Minicart_Myreg_btn = "a[class='cart-product-title']";
+        public static final String Minicart_Count = "span[class='header-fat__tile__count']";
+        public static final String Registry_addtocart_popup = "div[class='tru-modal-dialog__header atc-overlay__header']";
+
+        public static WebElement Registry_addtocart_btn(WebDriver driver, WebElement product) {
+            return product.findElement(By.cssSelector("button[data-at='btn__add-to-cart']"));
+        }
+
+        public static WebElement findProduct(WebDriver driver, String ItemSkn) {
+            return driver.findElement(By.cssSelector("div[data-at^='product__" + ItemSkn + "']"));
+        }
     }
 
     WebDriver driver = getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 15);
+    WebDriverWait wait = new WebDriverWait(driver, 40);
     Page_Registry_Create.Selectors selector = new Page_Registry_Create.Selectors();
     Overlay__LightBox lightBox = new Overlay__LightBox();
     URL siteURL;
@@ -110,36 +120,72 @@ public class Page_Registry_Addtocart extends AbstractPage_StepDefs {
 
     }*/
 
-    @And("^clicks add to cart for item# \"([^\"]*)\"$")
+   @And("^clicks add to cart for item \"([^\"]*)\"$")
     public void clicksAddToCartForItem(String arg0) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Page_Registry_Addtocart.Selectors.Addtocart_Myreg_btn)));
         driver.findElement(By.xpath(Page_Registry_Addtocart.Selectors.Addtocart_Myreg_btn)).click();
 
     }
 
-    @And("^the Add to Cart overlay is displayed with item \"([^\"]*)\"$")
-    public void theAddToCartOverlayIsDisplayedWithItem(String item_number) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Page_Registry_Addtocart.Selectors.Minicart_Myreg_btn)));
-        if (driver.findElement(By.cssSelector(Page_Registry_Addtocart.Selectors.Minicart_Myreg_btn)).isDisplayed())
+    @When("^clicks add to cart for item# \"([^\"]*)\"$")
+    public void addItemToCartFromMyRegistry(String ItemSkn) throws InterruptedException {
+        Thread.sleep(3000);
+        wait.until(ExpectedConditions.visibilityOf(Selectors.findProduct(driver,ItemSkn)));
+        WebElement Item=Selectors.findProduct(driver,ItemSkn);
+        if(Item.isDisplayed())
         {
-            System.out.println("User added Item to cart sucessfully from MyRegistry Page");
+            System.out.println("Item is available on My registry");
+            JavascriptExecutor executor = (JavascriptExecutor)driver;
+            executor.executeScript("arguments[0].click();", Selectors.Registry_addtocart_btn(driver,Item));
         }
         else
         {
-            System.out.println("User failed to  added Item to cart from MyRegistry Page\"");
+            System.out.println("Item is not available on the my registry");
+        }
+
+    }
+
+    @And("^the Add to Cart overlay is displayed with item \"([^\"]*)\"$")
+    public void theAddToCartOverlayIsDisplayedWithItem(String item_number) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Selectors.Registry_addtocart_popup)));
+        if (driver.findElement(By.cssSelector(Selectors.Registry_addtocart_popup)).isDisplayed())
+        {
+            System.out.println("User added Item to cart sucessfully from MyRegistry Page");
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(Selectors.Registry_addtocart_popup)));
+        }
+        else
+        {
+            System.out.println("User failed to  add Item to cart from MyRegistry Page\"");
         }
 
     }
 
     @And("^the minicart displays the total quantity carted along with any additional quantity \"([^\"]*)\" carted within this scenario$")
-    public void theMinicartDisplaysTheTotalQuantityCartedAlongWithAnyAdditionalQuantityCartedWithinThisScenario(String arg0) {
+    public void theMinicartDisplaysTheTotalQuantityCartedAlongWithAnyAdditionalQuantityCartedWithinThisScenario(String CartQty) {
         // Write code here that turns the phrase above into concrete actions
+        if(driver.findElement(By.cssSelector(Selectors.Minicart_Count)).getText().contentEquals(CartQty))
+        {
+            System.out.println("Mini cart Quantity is equal to the specified Quantity");
+        }
+        else
+        {
+            System.out.println("Mini cart Quantity is not equal to the specified Quantity");
+        }
 
     }
 
     @And("^the user lands on the cart page$")
     public void theUserLandsOnTheCartPage() {
         // Write code here that turns the phrase above into concrete actions
+        //if(driver.getTitle().contentEquals("Shopping Cart"))
+            if(driver.getTitle().contentEquals("shopping cart"))
+        {
+            System.out.println("Cart page is successfully loaded");
+        }
+        else
+        {
+            System.out.println("Cart page is not loaded");
+        }
 
     }
 
@@ -148,5 +194,4 @@ public class Page_Registry_Addtocart extends AbstractPage_StepDefs {
         // Write code here that turns the phrase above into concrete actions
 
     }
-
 }

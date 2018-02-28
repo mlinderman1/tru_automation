@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = {"src/test/resources/features/"},
-        tags = "@create",
+        tags = {"@registrant"},monochrome = true,
         glue="com.toysrus.automation.steps",
         strict = false)
 

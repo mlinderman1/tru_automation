@@ -132,8 +132,6 @@ public class Page_Login_Registry extends AbstractPage_StepDefs {
             String strRegistrynum = driver.findElement(By.cssSelector(Selectors.Dashboard_RegistryNumber)).getText();
             System.out.println(strRegistrynum);
             Assert.assertTrue(strRegistrynum == reg_number);
-        }else {
-
         }
     }
     @Then("^the user lands on the my registries list myaccount page with \"([^\"]*)\" listed")

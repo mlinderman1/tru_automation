@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 	    public class Cart__EmptyCart extends AbstractPage_StepDefs {
 
-	    public class Selectors {
+	    public static class Selectors {
 	    	
 	    	public static final String lnk__empty_mincart__signIn = "//a[contains(text(),'Sign in')]";
 	    	public static final String lnk__empty_mincart__create_one = ".empty-cart__content > a:nth-child(2)";
@@ -21,7 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	    WebDriver driver = getDriver();
 	    WebDriverWait wait = new WebDriverWait(driver, 15);
 	    Overlay__LightBox lightBox = new Overlay__LightBox();
-	    Selectors selector = new Selectors();
+	   
 	
 	    
 	    
@@ -29,8 +29,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	    @And("^the user clicks 'signIn' link from the  empty cart$")
 	    public void the_user_clicks_signIn_button_from_the_minimized_global_navbar() throws Throwable {
 			try{
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selector.lnk__empty_mincart__signIn)));
-				driver.findElement(By.xpath(selector.lnk__empty_mincart__signIn)).click();
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Selectors.lnk__empty_mincart__signIn)));
+				driver.findElement(By.xpath(Selectors.lnk__empty_mincart__signIn)).click();
 			}catch(Exception e){
 				System.out.println(e);
 			}
@@ -40,8 +40,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	    @And("^the user clicks 'its time to create one' link from the  empty cart$")
         public void the_user_clicks_its_time_to_create_one_link_from_the_empty_cart() throws Throwable {
 			try{
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector.lnk__empty_mincart__create_one)));
-				driver.findElement(By.cssSelector(selector.lnk__empty_mincart__create_one)).click();
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Selectors.lnk__empty_mincart__create_one)));
+				driver.findElement(By.cssSelector(Selectors.lnk__empty_mincart__create_one)).click();
 			}catch(Exception e){
 				System.out.println(e);
 			}
@@ -51,8 +51,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	    @And("^the user clicks 'take me home' button from the  empty cart$")
         public void the_user_clicks_take_me_home_button_from_the_empty_cart() throws Throwable {
 			try{
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector.btn__empty_mincart__take_me_home)));
-				driver.findElement(By.cssSelector(selector.btn__empty_mincart__take_me_home)).click();
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Selectors.btn__empty_mincart__take_me_home)));
+				driver.findElement(By.cssSelector(Selectors.btn__empty_mincart__take_me_home)).click();
 			}catch(Exception e){
 				System.out.println(e);
 			}

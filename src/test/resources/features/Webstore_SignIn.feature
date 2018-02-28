@@ -12,7 +12,7 @@ Feature: Webstore: User SignedIn
     And the user enters the email "<email>" and password "<password>" from flyout
     And the user submits the signIn button from flyout
     And the user verifies the flyout has closed
-    Then the user is "<email>" SignedIn Successfully from the  minimized global navbar
+    Then the user is SignedIn Successfully from the  minimized global navbar
  
  Examples:   
     | site |environment| email                  | password    |
@@ -31,7 +31,7 @@ Feature: Webstore: User SignedIn
     And the user enters the email "<email>" and password "<password>" from flyout
     And the user submits the signIn button from flyout
     And the user verifies the flyout has closed
-    Then the user is "<email>" SignedIn Successfully from the  minimized global navbar
+    Then the user is SignedIn Successfully from the  minimized global navbar
 
     Examples: 
      | site |environment| email                  | password    |

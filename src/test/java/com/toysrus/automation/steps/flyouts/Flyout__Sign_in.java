@@ -19,7 +19,7 @@ import cucumber.api.java.en.When;
 public class Flyout__Sign_in extends AbstractPage_StepDefs {
 
 
-    public class Selectors {
+    public static class Selectors {
     	
     	public static final String flyout__sign_in__side_panel = ".tru-side-panel__content.tru-side-panel__content--small";
     	public static final String txt__flyout__sign_in__email = "#email-0";
@@ -33,7 +33,6 @@ public class Flyout__Sign_in extends AbstractPage_StepDefs {
 
     WebDriver driver = getDriver();
     WebDriverWait wait = new WebDriverWait(driver, 15);
-    Selectors selector = new Selectors();
     Common_StepDefs common = new Common_StepDefs();
 
 
@@ -55,14 +54,14 @@ public void the_user_enters_the_email_and_password_through_MiniCart(String email
 
 private void inputLoginEmail(String email){
 
-	     	String cssSelector = selector.txt__flyout__sign_in__email;
+	     	String cssSelector = Selectors.txt__flyout__sign_in__email;
 	     	common.inputField(cssSelector, email);
 	    
 }
 
 private void inputLoginPassword(String password){
 	
-	String cssSelector = selector.txt__flyout__sign_in__password;
+	String cssSelector = Selectors.txt__flyout__sign_in__password;
    	common.inputField(cssSelector, password);
 	
 }
@@ -71,8 +70,8 @@ private void inputLoginPassword(String password){
 public void the_user_submits_the_signIn_button_from_flyout() throws Throwable {
 	try{
 		
-		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(selector.submit_btn__flyout__sign_in)));
-	    driver.findElement(By.cssSelector(selector.submit_btn__flyout__sign_in)).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(Selectors.submit_btn__flyout__sign_in)));
+	    driver.findElement(By.cssSelector(Selectors.submit_btn__flyout__sign_in)).click();
 	    
 	   }catch(Exception e){
 			System.out.println(e);

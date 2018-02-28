@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Flyout__Common extends AbstractPage_StepDefs {
 
-    public class Selectors {
+    public static class Selectors {
         public static final String btn__flyout__close =".tru-modal-dialog__close-btn";
         public static final String side_panel__flyout =".tru-side-panel__content";
     }
@@ -24,12 +24,12 @@ public class Flyout__Common extends AbstractPage_StepDefs {
     WebDriverWait wait = new WebDriverWait(driver, 20);
     Common_StepDefs common = new Common_StepDefs();
     int n;
-    Selectors selector = new Selectors();
+    
 
     @Then("^the user closes the flyout$")
     public void theUserClosesTheFlyout() throws Throwable {
         try{
-            driver.findElement(By.cssSelector(selector.btn__flyout__close)).click();
+            driver.findElement(By.cssSelector(Selectors.btn__flyout__close)).click();
         }
         catch(Exception e){
             System.out.println(e);
@@ -41,7 +41,7 @@ public class Flyout__Common extends AbstractPage_StepDefs {
     public void the_user_verifies_the_flyout_has_closed() throws Throwable {
     	try{
 
-    		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(selector.side_panel__flyout)));
+    		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(Selectors.side_panel__flyout)));
 
     	}
     	catch(Exception e){

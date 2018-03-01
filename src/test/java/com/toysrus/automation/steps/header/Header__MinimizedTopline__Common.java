@@ -25,8 +25,8 @@ public class Header__MinimizedTopline__Common extends AbstractPage_StepDefs {
 	    public static class t2Selectors {
 	    	public static final String btn__minimized_topline__logo__TRU = ".tru-logo-sm";
 	        public static final String btn__minimized_topline__logo__BRU = ".bru-logo-sm";
-	        public static final String link__minimized_topline__find_a_store1 = ".storeloc";
-	        public static final String link__minimized_topline__find_a_store2 = ".store-locator-tooltip";
+	        public static final String link__minimized_topline__find_a_store = ".storeloc";
+	        
 	    }
 
 	    
@@ -34,7 +34,7 @@ public class Header__MinimizedTopline__Common extends AbstractPage_StepDefs {
 	    WebDriverWait wait = new WebDriverWait(driver, 15);
 	    Random rand = new Random();
 	    int n;
-	    Common_StepDefs common = new Common_StepDefs();
+	    Common_StepDefs common;
 	    //    String selector = null;
 	  	    
 
@@ -54,80 +54,68 @@ public class Header__MinimizedTopline__Common extends AbstractPage_StepDefs {
 	     
 	    @When("^the user clicks mini \"([^\"]*)\" logo from minimized topline header$")
 	    public void theUserClicksMiniLogoFromMinimizedToplineHeader(String logo) throws Throwable {
-	            if (logo.toLowerCase().equals("tru")||logo.toLowerCase().equals("toys")){
-	            try{
-	                driver.findElement(By.cssSelector(Selectors.btn__minimized_topline__logo__TRU)).click();
-	            }
-	            catch(Exception e){
-	                driver.findElement(By.cssSelector(t2Selectors.btn__minimized_topline__logo__TRU)).click();
+	    	if (logo.toLowerCase().equals("tru")||logo.toLowerCase().equals("toys")){
+	    		if (common.verifyT2Page().equals(true)){
+	    			driver.findElement(By.cssSelector(t2Selectors.btn__minimized_topline__logo__TRU)).click();
+	    		}else{
+	    			driver.findElement(By.cssSelector(Selectors.btn__minimized_topline__logo__TRU)).click();
 
-	            }
-	        }
-	        else if (logo.toLowerCase().equals("bru")||logo.toLowerCase().equals("babies")){
-	            try{
-	                driver.findElement(By.cssSelector(Selectors.btn__minimized_topline__logo__BRU)).click();
-	            }
-	            catch(Exception e){
-	                driver.findElement(By.cssSelector(t2Selectors.btn__minimized_topline__logo__BRU)).click();
-
-	            }
-	        }
+	    		}
+	    	}
+	    	else if (logo.toLowerCase().equals("bru")||logo.toLowerCase().equals("babies")){
+	    		if (common.verifyT2Page().equals(true)){
+	    			driver.findElement(By.cssSelector(t2Selectors.btn__minimized_topline__logo__BRU)).click();
+	    		}
+	    		else{
+	    			driver.findElement(By.cssSelector(Selectors.btn__minimized_topline__logo__BRU)).click();
+	    		}
+	    	}
 	    }
 
 
-	   @When("^the user clicks mini ToysRUs logo from minimized topline header$")
-	    public WebElement theUserClicksToysRUsMiniLogoFromMinimizedToplineHeader() throws Throwable {
-	        WebElement btn__topline__logo__TRU = null;
+	    @When("^the user clicks mini ToysRUs logo from minimized topline header$")
+	    public void theUserClicksToysRUsMiniLogoFromMinimizedToplineHeader() throws Throwable {
+	    	WebElement btn__topline__logo__TRU = null;
 
-	        try{
-	            btn__topline__logo__TRU = driver.findElement(By.cssSelector(Selectors.btn__minimized_topline__logo__TRU));
-	            return btn__topline__logo__TRU;
-	        }
-	        catch(Exception e){
-	            btn__topline__logo__TRU = driver.findElement(By.cssSelector(t2Selectors.btn__minimized_topline__logo__TRU));
-	            return btn__topline__logo__TRU;
-	        }
-	        finally{
-	            btn__topline__logo__TRU.click();
-	        }
+	    	if (common.verifyT2Page().equals(true)){
+	    		btn__topline__logo__TRU = driver.findElement(By.cssSelector(t2Selectors.btn__minimized_topline__logo__TRU));
+	    		btn__topline__logo__TRU.click();
+	    	}
+	    	else{
+	    		btn__topline__logo__TRU = driver.findElement(By.cssSelector(Selectors.btn__minimized_topline__logo__TRU));
+	    		btn__topline__logo__TRU.click();
+	    	}
+
 	    }
 
 	   
-	    @When("^the user clicks mini BabiesRUs logo from minimized topline header$")
-	    public WebElement theUserClicksBabiesRUsMiniLogoFromMinimizedToplineHeader() throws Throwable {
-	        WebElement btn__topline__logo__BRU = null;
+	   @When("^the user clicks mini BabiesRUs logo from minimized topline header$")
+	   public void theUserClicksBabiesRUsMiniLogoFromMinimizedToplineHeader() throws Throwable {
+		   WebElement btn__topline__logo__BRU = null;
 
-	        try {
-	            btn__topline__logo__BRU = driver.findElement(By.cssSelector(Selectors.btn__minimized_topline__logo__BRU));
-	            return btn__topline__logo__BRU;
-	        } catch (Exception e) {
-	            btn__topline__logo__BRU = driver.findElement(By.cssSelector(t2Selectors.btn__minimized_topline__logo__BRU));
-	            return btn__topline__logo__BRU;
-	        } finally {
-	            btn__topline__logo__BRU.click();
-	        }
-	    }
+		   if (common.verifyT2Page().equals(true)){
+			   btn__topline__logo__BRU = driver.findElement(By.cssSelector(t2Selectors.btn__minimized_topline__logo__BRU));
+			   btn__topline__logo__BRU.click();
+		   } else {
+			   btn__topline__logo__BRU = driver.findElement(By.cssSelector(Selectors.btn__minimized_topline__logo__BRU));
+			   btn__topline__logo__BRU.click();
+		   }
+	   }
 
 	    
 	    @When("^the user clicks Find a Store link from minimized topline header$")
-	    public WebElement theUserClicksFindAStoreLinkFromMinimizedToplineHeader() throws Throwable {
-	        WebElement link__topline__find_a_store = null;
+	    public void theUserClicksFindAStoreLinkFromMinimizedToplineHeader() throws Throwable {
+	    	WebElement link__topline__find_a_store = null;
 
-	        try {
-	            link__topline__find_a_store = driver.findElement(By.cssSelector(Selectors.link__minimized_topline__find_a_store));
-	            return link__topline__find_a_store;
-	            
-	        } catch (Exception e) {
-	            try {
-	                link__topline__find_a_store = driver.findElement(By.cssSelector(t2Selectors.link__minimized_topline__find_a_store1));
-	                return link__topline__find_a_store;
-	            }
-	            catch (Exception a){
-	                link__topline__find_a_store = driver.findElement(By.cssSelector(t2Selectors.link__minimized_topline__find_a_store2));
-	                return link__topline__find_a_store;
-	            }
-	        } finally {
-	            link__topline__find_a_store.click();
-	        }
-	    }
- } 
+	    	if (common.verifyT2Page().equals(true)){
+	    		link__topline__find_a_store = driver.findElement(By.cssSelector(t2Selectors.link__minimized_topline__find_a_store));
+	    		link__topline__find_a_store.click();
+
+
+	    	} else {
+	    		link__topline__find_a_store = driver.findElement(By.cssSelector(Selectors.link__minimized_topline__find_a_store));
+	    		link__topline__find_a_store.click();
+	    	}
+	    } 
+}
+ 

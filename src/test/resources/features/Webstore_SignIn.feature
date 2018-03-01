@@ -1,5 +1,5 @@
 #  Author: surendra.pericherla@toysrus.com
-#  Recent Update: 2/21/2018
+#  Recent Update: 3/1/2018
 Feature: Webstore: User SignedIn
 
 
@@ -17,7 +17,6 @@ Feature: Webstore: User SignedIn
  Examples:   
     | site |environment| email                  | password    |
     | TRU  |prod       | tru.linderman@gmail.com| TestTest123 |
-
 
 
 

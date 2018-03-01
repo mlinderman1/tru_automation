@@ -2,13 +2,14 @@ package com.toysrus.automation.steps.header;
 
 	
 	import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
+    import cucumber.api.java.en.Then;
+    import org.junit.Assert;
 
-import org.openqa.selenium.By;
+    import org.openqa.selenium.By;
 	import org.openqa.selenium.WebDriver;
 	import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+    import org.openqa.selenium.support.ui.ExpectedConditions;
+     import org.openqa.selenium.support.ui.WebDriverWait;
 
 	import com.toysrus.automation.steps.common.AbstractPage_StepDefs;
 	import com.toysrus.automation.steps.common.Common_StepDefs;
@@ -37,62 +38,54 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	    WebDriverWait wait = new WebDriverWait(driver, 15);
 	    Random rand = new Random();
 	    int n;
-	    Common_StepDefs common = new Common_StepDefs();
+	    Common_StepDefs common;
 	   
 
 	    @And("^the user clicks 'Help' from the minimized global navbar$")
-	    public WebElement theUserClicksHelpFromTheMinimizedGlobalNavbar() throws Throwable {
+	    public void theUserClicksHelpFromTheMinimizedGlobalNavbar() throws Throwable {
 	        WebElement btn__minimized_global_nav__help = null;
 
-	        try {
-	            btn__minimized_global_nav__help = driver.findElement(By.cssSelector(Selectors.btn__minimized_global_nav__help));
-	            return btn__minimized_global_nav__help;
-	        }
-	        catch (Exception e) {
-
+	        if (common.verifyT2Page().equals(true)){
 	            btn__minimized_global_nav__help = driver.findElement(By.cssSelector(t2Selectors.btn__minimized_global_nav__help));
-	            return btn__minimized_global_nav__help;
-	        }
-	        finally {
 	            btn__minimized_global_nav__help.click();
 	        }
+	        else {
+
+	            btn__minimized_global_nav__help = driver.findElement(By.cssSelector(Selectors.btn__minimized_global_nav__help));
+	            btn__minimized_global_nav__help.click();
+	        }
+	        
 	    }
 	    
 	    @Then("^the user clicks 'Help Center' from the minimized global navbar 'help'$")
-	    public WebElement theUserClicksHelpCenterFromTheMinimizedGlobalNavbarHelp() throws Throwable {
+	    public void theUserClicksHelpCenterFromTheMinimizedGlobalNavbarHelp() throws Throwable {
 	        WebElement link__minimized_global_nav__help__help_center = null;
 
-	        try {
-	        	link__minimized_global_nav__help__help_center = driver.findElement(By.cssSelector(Selectors.link__minimized_global_nav__help__help_center));
-	            return link__minimized_global_nav__help__help_center;
-	        }
-	        catch (Exception e) {
-
+	        if (common.verifyT2Page().equals(true)){
 	        	link__minimized_global_nav__help__help_center = driver.findElement(By.cssSelector(t2Selectors.link__minimized_global_nav__help__help_center));
-	            return link__minimized_global_nav__help__help_center;
-	        }
-	        finally {
+	        	link__minimized_global_nav__help__help_center.click();
+	        }else {
+	       
+	        	link__minimized_global_nav__help__help_center = driver.findElement(By.cssSelector(Selectors.link__minimized_global_nav__help__help_center));
 	        	link__minimized_global_nav__help__help_center.click();
 	        }
 	    }
 	    
 	    
 	    @Then("^the user clicks 'live chat' from the minimized global navbar 'help'$")
-	    public WebElement theUserClicksLiveChatFromTheMinimizedGlobalNavbarHelp() throws Throwable {
+	    public void theUserClicksLiveChatFromTheMinimizedGlobalNavbarHelp() throws Throwable {
 	        WebElement link__minimized_global_nav__help__help_center = null;
 
-	        try {
-	        	link__minimized_global_nav__help__help_center = driver.findElement(By.cssSelector(Selectors.link__minimized_global_nav__help__help_center));
-	            return link__minimized_global_nav__help__help_center;
-	        }
-	        catch (Exception e) {
-
+	        if (common.verifyT2Page().equals(true)){
 	        	link__minimized_global_nav__help__help_center = driver.findElement(By.cssSelector(t2Selectors.link__minimized_global_nav__help__help_center));
-	            return link__minimized_global_nav__help__help_center;
-	        }
-	        finally {
 	        	link__minimized_global_nav__help__help_center.click();
 	        }
+	        else {
+
+	        	link__minimized_global_nav__help__help_center = driver.findElement(By.cssSelector(Selectors.link__minimized_global_nav__help__help_center));
+	        	link__minimized_global_nav__help__help_center.click();
+	        }
+	        
 	    }
 	    
 	    
@@ -109,25 +102,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 	 	    
 	    @Then("^the user is SignedIn Successfully from the  minimized global navbar$")
 	    public void the_user_is_SignedIn_Successfully_from_the_minimized_global_navbar() throws Throwable {
-			try {
+			
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Selectors.link__minimized_global_nav__signedIn)));
 
 				WebElement signIn_check_minicart_navbar = driver.findElement(By.cssSelector(Selectors.link__minimized_global_nav__signedIn));
 				if(signIn_check_minicart_navbar.isDisplayed()){
 					String emailText = driver.findElement(By.cssSelector(Selectors.link__minimized_global_nav__signedIn)).getText();
 					String[] splt = emailText.split(",");
-					String str = splt[0];
-					if(str.toLowerCase().contains("hello")){
-						System.out.println("The User SignedIn In Successfully");
-
-					}else
-						System.out.println("The User not SignedIn In Successfully");
-				}  
-
-			}catch(Exception e){
-				System.out.println(e);
-			}
+					String expectedMessage = splt[0];
+					String actual = "hello";
+					Assert.assertEquals(expectedMessage, actual);
+							
 		}
 	}
-
+}
 

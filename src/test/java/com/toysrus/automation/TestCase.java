@@ -5,7 +5,7 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = {"src/test/resources/features/SSO__AWS__ATG__NewUser.feature/"},
+@CucumberOptions(features = {"src/test/resources/features/"},
         glue="com.toysrus.automation.steps",
         strict = false)
 

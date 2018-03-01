@@ -6,7 +6,7 @@ Feature: SSO: ATG New User
     Given the user navigates to "<site>" site in "<environment>" environment for SSO
     And the user clicks 'My Account' from the global navbar
     And the user clicks 'Create' from the global navbar
-    And the user creates account in "toysrus"
+    And the user creates account in toysrus
     Then user should be linked
 
     Examples: 
@@ -17,7 +17,7 @@ Feature: SSO: ATG New User
     Given the user navigates to "<site>" site in "<environment>" environment for SSO
     And the user clicks 'My Account' from the global navbar
     And the user clicks 'Create' from the global navbar
-    And the user creates account in "toysrus"
+    And the user creates account in toysrus
     Then user  see profile page
     And user clicks on welcome back
     And user sign out from ATG

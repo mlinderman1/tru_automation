@@ -43,9 +43,8 @@ public class Page__MyAccount extends AbstractPage_StepDefs {
 		closeDriver();
 	}
 
-	@And("the user creates account in \"([^\"]*)\"")
-	public void createAccount(String site) {
-		if (site.equalsIgnoreCase("toysrus")) {
+	@And("the user creates account in toysrus")
+	public void createAccount() {
 			String email = common.generateEmail();
 			RunTimeVariables.emailId = email;
 			String password="Passw0rd";
@@ -55,6 +54,5 @@ public class Page__MyAccount extends AbstractPage_StepDefs {
 			common.typeInto(Selectors.tb_confirmPassword,password);
 			common.clickOn(Selectors.btn_SignUp);
 			Assert.assertEquals(email, common.getText(Selectors.page_validation));
-		}
 	}
 }

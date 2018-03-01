@@ -1,5 +1,5 @@
 #  Author: sanket.tomar@toysrus.com
-#  Recent Update: 2/22/2018
+#  Recent Update: 2/28/2018
 
 
 Feature: Webstore: PDP Sticky Footer
@@ -15,6 +15,23 @@ Feature: Webstore: PDP Sticky Footer
     And the user scrolls down the page so sticky footer shows up
     And the user adds PDP item to cart from sticky footer
     Then the Add to Cart overlay is displayed
+
+    Examples:
+      |site|environment|
+      |TRU |prod       |
+      
+      
+  Scenario Outline: Verify display of sticky footer based on the commerce zone availability on PDP page
+
+    Given the user navigates to "<site>" site in "<environment>" environment
+    And the user searches for a random item
+    And the user is on the PLP page
+    When the user clicks to PDP of in-stock Ship-to item from PLP page
+    When the user is on the PDP page
+    And the user scrolls down the page till commerce zone is not visible
+    Then sticky footer is displayed on the bottom of the PDP page
+    When the user scrolls back up the page so commerce zone is visible
+    Then sticky footer is not displayed any where on the page
 
     Examples:
       |site|environment|

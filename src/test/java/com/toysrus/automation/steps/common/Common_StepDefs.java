@@ -4,6 +4,7 @@ import com.toysrus.automation.steps.overlays.Overlay__LightBox;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,7 @@ public class Common_StepDefs extends AbstractPage_StepDefs {
     int n;
     Overlay__LightBox lightBox = new Overlay__LightBox();
     Selectors selector = new Selectors();
+    JavascriptExecutor je = (JavascriptExecutor) driver;
 
     public void typeIntoInputField(String cssSelector, String input){
         WebElement element = driver.findElement(By.cssSelector(cssSelector));
@@ -80,6 +82,20 @@ public class Common_StepDefs extends AbstractPage_StepDefs {
             System.out.println(e);
         }
     }
+    
+    public void scrollToWebElement(String cssSelector){
+        try{
+            String selector = cssSelector;
+            WebElement element = driver.findElement(By.cssSelector(selector));
+            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(selector)));
+
+            je.executeScript("arguments[0].scrollIntoView(true);",element);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
 
     public Boolean verifyT2Page() throws Throwable {
         Boolean isT2Page = driver.findElements(By.cssSelector(selector.t2page)).size() > 0;

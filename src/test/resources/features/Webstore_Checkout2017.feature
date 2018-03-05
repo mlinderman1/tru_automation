@@ -1,5 +1,5 @@
 #  Author: Mike.Linderman@toysrus.com
-#  Recent Update: 2/15/2018
+#  Recent Update: 3/5/2018
 
 Feature: Webstore: Checkout Payment Variations
 
@@ -16,6 +16,7 @@ Feature: Webstore: Checkout Payment Variations
     And the user is on the checkout page
     And the user inputs shipping address during checkout
     And the user continues to next tab during checkout
+    And the user opts for inputted address if prompted
     And the user is on the billing tab of checkout
     And the user inputs email during checkout
     And the user chooses credit/debit card as method of payment
@@ -43,6 +44,7 @@ Feature: Webstore: Checkout Payment Variations
     And the user is on the checkout page
     And the user inputs shipping address during checkout
     And the user continues to next tab during checkout
+    And the user opts for inputted address if prompted
     And the user is on the billing tab of checkout
     And the user inputs email during checkout
     And the user chooses pay in store as method of payment

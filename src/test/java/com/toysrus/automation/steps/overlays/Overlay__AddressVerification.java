@@ -1,4 +1,4 @@
-package com.toysrus.automation.steps.checkout;
+package com.toysrus.automation.steps.overlays;
 
 import com.toysrus.automation.steps.common.AbstractPage_StepDefs;
 import com.toysrus.automation.steps.overlays.Overlay__LightBox;
@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.URL;
 import java.util.Random;
 
-public class Checkout__AddressDoctor extends AbstractPage_StepDefs {
+public class Overlay__AddressVerification extends AbstractPage_StepDefs {
 
     //     (ADDRESS DOCTOR TO BE DECOMMISSIONED WITH NEW CHECKOUT 2018; GOOGLE ADDRESS API TO BE USED)
 
@@ -21,7 +21,7 @@ public class Checkout__AddressDoctor extends AbstractPage_StepDefs {
         public static final String overlay__address_doctor = ".address-doctor";
         public static final String checkbox__address_doctor__user_address = "#suggestedAddressCount-0";
         public static final String checkbox__address_doctor__suggested_address = "#suggestedAddressCount-1";
-        public static final String btn__address_doctor__useAddress = "#continueWithSugestedAddr";
+        public static final String btn__address_doctor__useThisAddress = "#continueWithSugestedAddr";
     }
 
     WebDriver driver = getDriver();
@@ -30,24 +30,41 @@ public class Checkout__AddressDoctor extends AbstractPage_StepDefs {
     Random rand = new Random();
     int n;
     Overlay__LightBox lightBox = new Overlay__LightBox();
-    Selectors selector = new Selectors();
 
-    @And("^the user opts for inputted address$")
+    @And("^the user submits the address verification overlay$")
+    public void theUserSubmitsTheAddressDoctorOverlay() throws Throwable {
+        try{
+            WebElement addressDoctor_useButton = driver.findElement(By.cssSelector(Selectors.btn__address_doctor__useThisAddress));
+            addressDoctor_useButton.click();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    @And("^the user opts for inputted address if prompted$")
     public void theUserOptsForInputtedAddress() throws Throwable {
         try {
-            WebElement addressDoctor = driver.findElement(By.cssSelector(selector.overlay__address_doctor));
+            WebElement addressDoctor = driver.findElement(By.cssSelector(Selectors.overlay__address_doctor));
 
             wait.until(ExpectedConditions.visibilityOf(addressDoctor));
 
             if (addressDoctor.isDisplayed()) {
-                do {
-                    WebElement addressDoctor_useButton = driver.findElement(By.cssSelector(selector.checkbox__address_doctor__user_address));
-                    addressDoctor_useButton.click();
+
+                WebElement addressDoctor_userAddress = driver.findElement(By.cssSelector(Selectors.checkbox__address_doctor__user_address));
+
+                if (!addressDoctor_userAddress.isSelected()){
+                    do {
+                        addressDoctor_userAddress.click();
+                    }
+                    while (!addressDoctor.isSelected());
                 }
-                while (addressDoctor.isDisplayed());
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+        finally{
+            theUserSubmitsTheAddressDoctorOverlay();
         }
     }
 

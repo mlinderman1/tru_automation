@@ -59,7 +59,19 @@ public class Data {
     public static final String user__email = "tru.linderman@gmail.com";
   }
 
-  public static ArrayList search_Items() {
+  public static class addressVerificationTestUser {
+    //Shipping
+    public static final String user__shipping__first_name = "John";
+    public static final String user__shipping__last_name = "Doe";
+    public static final String user__shipping__address1 = "1 Geoffrey Ln";
+    public static final String user__shipping__address2 = "";
+    public static final String user__shipping__city = "Wayne";
+    public static final String user__shipping__state = "NJ";
+    public static final String user__shipping__zip = "07470";
+    public static final String user__shipping__phone = "1234567890";
+  }
+
+    public static ArrayList search_Items() {
     ArrayList<String> search_items = new ArrayList<String>();
     search_items.add("barbie");
     search_items.add("ninja turtle");

@@ -3,9 +3,8 @@ package com.toysrus.automation.steps.checkout;
 import com.toysrus.automation.lib.Data;
 import com.toysrus.automation.steps.common.AbstractPage_StepDefs;
 import com.toysrus.automation.steps.common.Common_StepDefs;
+import com.toysrus.automation.steps.overlays.Overlay__AddressVerification;
 import com.toysrus.automation.steps.overlays.Overlay__LightBox;
-import com.toysrus.automation.steps.checkout.*;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.openqa.selenium.By;
@@ -21,7 +20,7 @@ import java.util.Random;
 public class Checkout__Common extends AbstractPage_StepDefs {
 
 
-    public class Selectors {
+    public static class Selectors {
         public static final String container__page__order_review = Checkout__OrderReview.Selectors.container__page__order_review;
 
         public static final String btn__order_review = ".checkout-review-order";
@@ -48,15 +47,14 @@ public class Checkout__Common extends AbstractPage_StepDefs {
     Random rand = new Random();
     int n;
     Overlay__LightBox lightBox = new Overlay__LightBox();
-    Selectors selector = new Selectors();
-    Checkout__AddressDoctor addressDoctor = new Checkout__AddressDoctor();
+    Overlay__AddressVerification addressDoctor = new Overlay__AddressVerification();
     Data.user1 user = new Data.user1();
     Common_StepDefs common = new Common_StepDefs();
 
     @And("^the user is on the checkout page$")
     public void theUserIsOnTheCartPage() throws Throwable {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector.container__page__checkout)));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(Selectors.container__page__checkout)));
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -70,9 +68,9 @@ public class Checkout__Common extends AbstractPage_StepDefs {
 
     @And("^the user continues to next tab during checkout$")
     public void iContinueToNextTabDuringCheckout() throws Throwable {
-        String payment = selector.btn__continue_to_payment;
-        String pickup = selector.btn__continue_to_pickup;
-        String gifting = selector.btn__continue_to_gifting;
+        String payment = Selectors.btn__continue_to_payment;
+        String pickup = Selectors.btn__continue_to_pickup;
+        String gifting = Selectors.btn__continue_to_gifting;
 
         if (driver.findElements(By.cssSelector(payment)).size() > 0) {
             WebElement continue_btn = driver.findElement(By.cssSelector(payment));
@@ -103,7 +101,7 @@ public class Checkout__Common extends AbstractPage_StepDefs {
     @And("^the user is on the billing tab of checkout$")
     public void theUserIsOnTheBillingTabOfCheckout() throws Throwable {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector.container__checkout__billing)));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Selectors.container__checkout__billing)));
         }
         catch(Exception e){
             return;
@@ -112,9 +110,9 @@ public class Checkout__Common extends AbstractPage_StepDefs {
 
     @Then("^the user inputs email during checkout$")
     public void iInputEmailDuringCheckout() throws Throwable {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector.container__checkout__billing)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Selectors.container__checkout__billing)));
 
-        String cssSelector = selector.input__checkout__email;
+        String cssSelector = Selectors.input__checkout__email;
         String data = user.user__email;
 
         common.inputField(cssSelector, data);
@@ -122,9 +120,9 @@ public class Checkout__Common extends AbstractPage_StepDefs {
 
     @And("^the user clicks 'review order' button$")
     public void theUserClicksReviewOrderButton() throws Throwable {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector.btn__order_review)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Selectors.btn__order_review)));
 
-        WebElement orderReviewBtn = driver.findElement(By.cssSelector(selector.btn__order_review));
+        WebElement orderReviewBtn = driver.findElement(By.cssSelector(Selectors.btn__order_review));
         orderReviewBtn.click();
     }
 
@@ -132,12 +130,12 @@ public class Checkout__Common extends AbstractPage_StepDefs {
     @And("^the user clicks place order button$")
     public void theUserClicksPlaceOrderButton() throws Throwable {
         try {
-            if (driver.findElements(By.cssSelector(selector.container__page__order_review)).size() > 0) {
-                WebElement placeOrder_btn = driver.findElement(By.cssSelector(selector.btn__order_review__place_order));
+            if (driver.findElements(By.cssSelector(Selectors.container__page__order_review)).size() > 0) {
+                WebElement placeOrder_btn = driver.findElement(By.cssSelector(Selectors.btn__order_review__place_order));
                 placeOrder_btn.click();
             }
-            if (driver.findElements(By.cssSelector(selector.container__checkout__billing)).size() > 0) {
-                WebElement placeOrder_btn = driver.findElement(By.cssSelector(selector.btn__checkout__place_order));
+            if (driver.findElements(By.cssSelector(Selectors.container__checkout__billing)).size() > 0) {
+                WebElement placeOrder_btn = driver.findElement(By.cssSelector(Selectors.btn__checkout__place_order));
                 placeOrder_btn.click();
             }
         } catch (NoSuchElementException e) {

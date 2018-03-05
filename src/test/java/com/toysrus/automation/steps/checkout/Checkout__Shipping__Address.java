@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class Checkout__Shipping__Address extends AbstractPage_StepDefs {
 
-    public class Selectors {
+    public static class Selectors {
         public static final String container__shipping = ".checkout-shipping-content";
 
         public static final String input__address_field = ".shipping-address-field";
@@ -36,8 +36,8 @@ public class Checkout__Shipping__Address extends AbstractPage_StepDefs {
     Random rand = new Random();
     int n;
     Overlay__LightBox lightBox = new Overlay__LightBox();
-    Selectors selector = new Selectors();
     Data.user1 user = new Data.user1();
+//    Data.addressVerificationTestUser user = new Data.addressVerificationTestUser();
     Data.credit_card__Visa cc = new Data.credit_card__Visa();
     Common_StepDefs common = new Common_StepDefs();
     Checkout__Shipping__DeliveryMethod delivery = new Checkout__Shipping__DeliveryMethod();
@@ -72,35 +72,35 @@ public class Checkout__Shipping__Address extends AbstractPage_StepDefs {
     }
 
     private void inputShippingFirstName() {
-        String cssSelector = selector.input__shipping__first_name;
+        String cssSelector = Selectors.input__shipping__first_name;
         String data = user.user__shipping__first_name;
 
         common.inputField(cssSelector, data);
     }
 
     private void inputShippingLastName() {
-        String cssSelector = selector.input__shipping__last_name;
+        String cssSelector = Selectors.input__shipping__last_name;
         String data = user.user__shipping__last_name;
 
         common.inputField(cssSelector, data);
     }
 
     private void inputShippingAddress1() {
-        String cssSelector = selector.input__shipping__address1;
+        String cssSelector = Selectors.input__shipping__address1;
         String data = user.user__shipping__address1;
 
         common.inputField(cssSelector, data);
     }
 
     private void inputShippingAddress2() {
-        String cssSelector = selector.input__shipping__address2;
+        String cssSelector = Selectors.input__shipping__address2;
         String data = user.user__shipping__address2;
 
         common.inputField(cssSelector, data);
     }
 
     private void inputShippingCity() {
-        String cssSelector = selector.input__shipping__city;
+        String cssSelector = Selectors.input__shipping__city;
         String data = user.user__shipping__city;
 
         common.inputField(cssSelector, data);
@@ -108,21 +108,21 @@ public class Checkout__Shipping__Address extends AbstractPage_StepDefs {
 
 
     private void inputShippingState() {
-        String cssSelector = selector.dropdown__shipping__state;
+        String cssSelector = Selectors.dropdown__shipping__state;
         String data = user.user__shipping__state;
 
         common.selectFromDropdownMenu(cssSelector, data);
     }
 
     private void inputShippingZip() {
-        String cssSelector = selector.input__shipping__zip;
+        String cssSelector = Selectors.input__shipping__zip;
         String data = user.user__shipping__zip;
 
         common.inputField(cssSelector, data);
     }
 
     private void inputShippingPhone() {
-        String cssSelector = selector.input__shipping__phone;
+        String cssSelector = Selectors.input__shipping__phone;
         String data = user.user__shipping__phone;
 
         common.inputField(cssSelector, data);
@@ -131,8 +131,8 @@ public class Checkout__Shipping__Address extends AbstractPage_StepDefs {
       @Then("^the user inputs shipping address during checkout$")
   public void iInputShippingInformationDuringCheckout() throws Throwable {
 
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(selector.container__shipping)));
-    int inputFieldsCount = driver.findElements(By.cssSelector(selector.input__address_field)).size();
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Selectors.container__shipping)));
+    int inputFieldsCount = driver.findElements(By.cssSelector(Selectors.input__address_field)).size();
     try {
 
       for (int x = 1; x <= inputFieldsCount; x++) {

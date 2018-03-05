@@ -1,4 +1,4 @@
-package com.toysrus.automation.steps.pages;
+package com.toysrus.automation.steps.homepage;
 
 import com.toysrus.automation.steps.common.*;
 import com.toysrus.automation.steps.overlays.*;
@@ -20,9 +20,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 
-public class Page__Homepage extends AbstractPage_StepDefs {
+public class Homepage__Common extends AbstractPage_StepDefs {
 
-    public class Selectors {
+    public static class Selectors {
         public static final String page = ".page-layout";
         public static final String page__homepage__tru = ".page-wrapper--tru";
         public static final String page__homepage__bru = ".page-wrapper--bru";
@@ -30,7 +30,6 @@ public class Page__Homepage extends AbstractPage_StepDefs {
 
     WebDriver driver = getDriver();
     WebDriverWait wait = new WebDriverWait(driver, 15);
-    Selectors selector = new Selectors();
     Overlay__LightBox lightBox = new Overlay__LightBox();
     String siteURL = null;
 
@@ -69,21 +68,21 @@ public class Page__Homepage extends AbstractPage_StepDefs {
     @Then("^the user is on \"([^\"]*)\" homepage$")
     public void theUserIsOnHomepage(String site) throws Throwable {
         if (site.toLowerCase().contains("toys") || site.toLowerCase().equals("tru")) {
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector.page__homepage__tru)));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(Selectors.page__homepage__tru)));
         }
         else if (site.toLowerCase().contains("babies") || site.toLowerCase().equals("bru")) {
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector.page__homepage__bru)));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(Selectors.page__homepage__bru)));
         }
     }
 
     @And("^the user is on ToysRUs homepage$")
     public void theUserIsOnToysRUsHomepage() throws Throwable {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector.page__homepage__tru)));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(Selectors.page__homepage__tru)));
     }
 
     @And("^the user is on BabiesRUs homepage$")
     public void theUserIsOnBabiesRUsHomepage() throws Throwable {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector.page__homepage__bru)));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(Selectors.page__homepage__bru)));
     }
 
 }

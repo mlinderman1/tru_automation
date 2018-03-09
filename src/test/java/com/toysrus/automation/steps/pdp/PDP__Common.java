@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class PDP__Common extends AbstractPage_StepDefs {
 
     public class Selectors {
-        public static final String container__page__pdp = ".pdp-page-container";
+        public static final String container__page__pdp = ".desktop-product-page";
         public static final String link__pdp__ispu = ".product-ship-to-store__status-ispu a";
         public static final String page__footer = ".footer-group.footer-sitemap";
     }
@@ -42,7 +42,7 @@ public class PDP__Common extends AbstractPage_StepDefs {
                 lightBox.theUserClosesTheLightbox();
             }
             catch (Exception e) {
-                System.out.println(e);
+            	System.out.println(e);
             }
         }
     }

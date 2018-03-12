@@ -162,6 +162,7 @@ public class Header__Topline extends AbstractPage_StepDefs {
             }
         } finally {
             link__topline__registry.click();
+            Thread.sleep(5000);
         }
     }
 
